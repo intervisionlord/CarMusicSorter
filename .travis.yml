@@ -1,0 +1,10 @@
+language: bash
+
+before_script: 
+  - mkdir -p testDir/testSubdir
+  - touch testDir/testSubdir/testTrack.mp3
+  - ls -l testDir
+
+script: "bash CMSorter.sh testDir"
+
+after_script: "ls -l testDir"
