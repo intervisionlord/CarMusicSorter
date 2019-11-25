@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/intervisionlord/CarMusicSorter.svg?branch=master)](https://travis-ci.org/intervisionlord/CarMusicSorter)
+
 # CarMusicSorter
 Готовит треки для аавтомагнитол. Извлекает из директорий-альбомов mp3 треки и помещает их в директорию исполнителя.
 
