@@ -1,18 +1,25 @@
-import yaml, gettext, locale, os
+import yaml, gettext, locale, os, re, shutil
 from sys  import exit
 from tkinter import *
 import tkinter.filedialog as fd
-
+input_dir = ''
+output_dir = ''
 # Определение исходной и целевой директорий
 def workdirs(param):
     if param == 'indir':
+        global input_dir
         input_dir = fd.askdirectory(title = _('Open source directory'))
         if input_dir != '':
-            source_label.config(text = _('Source dir is: ') + input_dir)
+            source_label.config(text = input_dir)
+        else:
+            input_dir = ''
     elif param == 'outdir':
+        global output_dir
         output_dir = fd.askdirectory(title = _('Set destination directory'))
         if output_dir != '':
-            dest_label.config(text = _('Destination dir is: ') + output_dir)
+            dest_label.config(text = output_dir)
+        else:
+            output_dir = ''
 
 # Вызов "О программе"
 def popup_about(vers):
@@ -79,8 +86,8 @@ first_step = Label(window, text =  '1. ', font = 'bold').grid(column = 0, row = 
 second_step = Label(window, text = '2. ', font = 'bold').grid(column = 0, row = 1)
 
 # 1. Пояснения
-source_label_text = _('Choose input directory')
-dest_label_text = _('Choose output directory')
+source_label_text = _('Input DIR not defined')
+dest_label_text = _('Output DIR not defined')
 
 source_label = Label(window, text = source_label_text, justify = LEFT)
 source_label.grid(column = 2, row = 0)
@@ -88,9 +95,52 @@ dest_label = Label(window, text = dest_label_text, justify = LEFT)
 dest_label.grid(column = 2, row = 1)
 
 # 2. Кнопки
-source_button = Button(window, text = _('Browse'), command = lambda: workdirs('indir'), \
-image = sourceicon, width = 80, height = 20, compound = 'left').grid(column = 1, row = 0)
+source_button = Button(window, text = _('Choose input DIR'), command = lambda: workdirs('indir'), \
+image = sourceicon, width = 140, height = 20, compound = 'left').grid(column = 1, row = 0)
 
-dest_button = Button(window, text = _('Browse'), command = lambda: workdirs('outdir'), \
-image = desticon, width = 80, height = 20, compound = 'left').grid(column = 1, row = 1)
+dest_button = Button(window, text = _('Choose output DIR'), command = lambda: workdirs('outdir'), \
+image = desticon, width = 140, height = 20, compound = 'left').grid(column = 1, row = 1)
 window.mainloop()
+#################
+exit() # Заглушка
+#################
+# 3. !! Оперирование файлами !!
+if input_dir == '' or output_dir == '':
+    print('Не указана начальная или конечная директория')
+    exit()
+elif input_dir == output_dir:
+    print('Начальная и конечная директории не должны совпадать')
+    exit()
+try:
+    input_dir
+except:
+    pass
+else:
+    for path, subdirs, files in os.walk(input_dir):
+        for file in files:
+            filtered = re.search('.*mp3', file)
+            if filtered != None:
+                print(f'{path}/{filtered.group(0)}')
+                shutil.copyfile(f'{path}/{filtered.group(0)}', f'{output_dir}/{filtered.group(0)}')
+source_file = []
+for files in os.walk(output_dir):
+    for file in files[2]:
+        try:
+            source_file.append(re.search('^\d{1,2}([\-\.]|[\s\-]|[\-\s]|[\.\s]).*', file).group(0))
+        except:
+            print('Мусора в начале файла не найдено')
+        try:
+            source_file.append(re.search('[rR]emix|[lL]ive', file).group(0))
+        except:
+            print('лайвы и едиты не найдены')
+        finally:
+            print(source_file)
+for file in source_file:
+    new_file = re.split('^\d{1,2}([\-\.]|[\s\-]|[\-\s]|[\.\s])\s?', file)
+    print(new_file[2])
+    shutil.move(f'{output_dir}/{file}', f'{output_dir}/{new_file[2]}')
+# postprocess
+source_file.clean()
+for file in os.walk(output_dir):
+    print(re.search('.*(\(live\))'), file)
+    #source_file.append()
