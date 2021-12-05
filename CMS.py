@@ -27,7 +27,7 @@ def popup_about(vers):
     popup.geometry(f'{main_width}x{main_height}+{center_x_pos}+{center_y_pos}')
     #popup.eval('tk::PlaceWindow . center')
     popup.title(_('About'))
-    imagepath = 'data/assets/imgs/main.png'
+    imagepath = 'data/imgs/main.png'
     img = PhotoImage(file = imagepath)
     poplabel1 = Label(popup, image = img).grid(column = 0, row = 0)
     poplabel2 = Label(popup, text = 'Car Music Sorter\n\n' + _('Version: ') + vers + \
@@ -55,14 +55,14 @@ gettext.translation('CarMusicSorter', localedir='l10n', languages=[locale]).inst
 # Рисуем окно
 window = Tk()
 
-window.iconphoto(True, PhotoImage(file = 'data/assets/imgs/main.png'))
+window.iconphoto(True, PhotoImage(file = 'data/imgs/main.png'))
 window.geometry('400x200')
 window.eval('tk::PlaceWindow . center')
-window.title(f'Car Music Sorter v.: {vers}')
+window.title('Car Music Sorter')
 
 # Пути к оформлению
-sourceicon = PhotoImage(file = 'data/assets/imgs/20source.png')
-desticon = PhotoImage(file = 'data/assets/imgs/20dest.png')
+sourceicon = PhotoImage(file = 'data/imgs/20source.png')
+desticon = PhotoImage(file = 'data/imgs/20dest.png')
 
 # Основное меню
 menu = Menu(window)
