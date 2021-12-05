@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2021-12-05 02:56+0300\n"
-"PO-Revision-Date: 2021-12-05 02:56+0300\n"
+"POT-Creation-Date: 2021-12-05 05:51+0300\n"
+"PO-Revision-Date: 2021-12-05 05:52+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: ru_RU\n"
@@ -20,30 +20,59 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: CMS.py:31
-msgid "Info"
-msgstr "Справка"
+#: CMS.py:9
+msgid "Open source directory"
+msgstr "Открыть исходную директорию"
 
-#: CMS.py:34 functions/functions.py:13
+#: CMS.py:11
+msgid "Source dir is: "
+msgstr "Исходная директория: "
+
+#: CMS.py:13
+msgid "Set destination directory"
+msgstr "Указать конечную директорию"
+
+#: CMS.py:15
+msgid "Destination dir is: "
+msgstr "Конечная директория: "
+
+#: CMS.py:21 CMS.py:65
 msgid "About"
 msgstr "О программе"
 
-#: CMS.py:39
-msgid "Choose directory where tracks were taken from"
-msgstr "Выберите директорию, из которой будут взяты треки"
-
-#: CMS.py:42 functions/functions.py:8
-msgid "Begin!"
-msgstr "Начать!"
-
-#: functions/functions.py:17
+#: CMS.py:25
 msgid "Version: "
 msgstr "Версия: "
 
-#: functions/functions.py:18
+#: CMS.py:26
 msgid ""
 "\n"
 "Author: "
 msgstr ""
 "\n"
 "Разработчик: "
+
+#: CMS.py:62
+msgid "Info"
+msgstr "Справка"
+
+#: CMS.py:74
+msgid "Choose input directory"
+msgstr "Укажите исходную директорию"
+
+#: CMS.py:75
+msgid "Choose output directory"
+msgstr "Укажите конечную директорию"
+
+#: CMS.py:83 CMS.py:86
+msgid "Browse"
+msgstr "Обзор"
+
+#~ msgid "Begin!"
+#~ msgstr "Начать!"
+
+#~ msgid "Input Dir"
+#~ msgstr "Исходная директория"
+
+#~ msgid "Choose directory where tracks were taken from"
+#~ msgstr "Выберите директорию, из которой будут взяты треки"
