@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2021-12-05 05:51+0300\n"
-"PO-Revision-Date: 2021-12-05 05:52+0300\n"
+"POT-Creation-Date: 2021-12-05 06:08+0300\n"
+"PO-Revision-Date: 2021-12-05 06:22+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: ru_RU\n"
@@ -36,15 +36,15 @@ msgstr "Указать конечную директорию"
 msgid "Destination dir is: "
 msgstr "Конечная директория: "
 
-#: CMS.py:21 CMS.py:65
+#: CMS.py:29 CMS.py:73
 msgid "About"
 msgstr "О программе"
 
-#: CMS.py:25
+#: CMS.py:33
 msgid "Version: "
 msgstr "Версия: "
 
-#: CMS.py:26
+#: CMS.py:34
 msgid ""
 "\n"
 "Author: "
@@ -52,19 +52,19 @@ msgstr ""
 "\n"
 "Разработчик: "
 
-#: CMS.py:62
+#: CMS.py:70
 msgid "Info"
 msgstr "Справка"
 
-#: CMS.py:74
+#: CMS.py:82
 msgid "Choose input directory"
 msgstr "Укажите исходную директорию"
 
-#: CMS.py:75
+#: CMS.py:83
 msgid "Choose output directory"
 msgstr "Укажите конечную директорию"
 
-#: CMS.py:83 CMS.py:86
+#: CMS.py:91 CMS.py:94
 msgid "Browse"
 msgstr "Обзор"
 
