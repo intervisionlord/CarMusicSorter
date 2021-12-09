@@ -3,8 +3,10 @@ __pycache__
 # Файлы и директории от сборки
 build
 dist
-afterinstall
 *.spec
 
 # Файлы и директории тестировнаия
 test*
+
+# Упаковщик
+Build.py
