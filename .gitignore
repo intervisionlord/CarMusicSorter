@@ -5,3 +5,6 @@ build
 dist
 afterinstall
 *.spec
+
+# Файлы и директории тестировнаия
+test*
