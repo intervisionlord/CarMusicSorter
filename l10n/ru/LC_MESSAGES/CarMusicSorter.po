@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2021-12-10 18:52+0300\n"
-"PO-Revision-Date: 2021-12-10 18:53+0300\n"
+"POT-Creation-Date: 2021-12-10 20:48+0300\n"
+"PO-Revision-Date: 2021-12-10 20:49+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: ru_RU\n"
@@ -28,23 +28,27 @@ msgstr "Открыть исходную директорию"
 msgid "Set destination directory"
 msgstr "Указать конечную директорию"
 
-#: CMS.py:26 CMS.py:148
+#: CMS.py:26 CMS.py:163
 msgid "Input DIR not defined"
 msgstr "Исходная директория не указана"
 
-#: CMS.py:27 CMS.py:149
+#: CMS.py:27 CMS.py:164
 msgid "Output DIR not defined"
 msgstr "Конечная директория не указана"
 
-#: CMS.py:42 CMS.py:138
+#: CMS.py:28
+msgid "Paths cleared"
+msgstr "Пути очищены"
+
+#: CMS.py:48 CMS.py:151
 msgid "About"
 msgstr "О программе"
 
-#: CMS.py:46
+#: CMS.py:54
 msgid "Version: "
 msgstr "Версия: "
 
-#: CMS.py:47
+#: CMS.py:55
 msgid ""
 "\n"
 "Author: "
@@ -52,105 +56,47 @@ msgstr ""
 "\n"
 "Разработчик: "
 
-#: CMS.py:135
+#: CMS.py:58
+msgid "Icons: "
+msgstr "Иконки: "
+
+#: CMS.py:148
 msgid "Info"
 msgstr "Справка"
 
-#: CMS.py:142
+#: CMS.py:155
 msgid "IO Directories"
 msgstr "Начальная / Конечная директории"
 
-#: CMS.py:144
+#: CMS.py:157
 msgid "Operations"
 msgstr "Операции"
 
-#: CMS.py:157
+#: CMS.py:159
+msgid "Progress"
+msgstr "Прогресс"
+
+#: CMS.py:172
 msgid "Choose input DIR"
 msgstr "Исходная директория"
 
-#: CMS.py:161
+#: CMS.py:176
 msgid "Choose output DIR"
 msgstr "Конечная директория"
 
-#: CMS.py:165
+#: CMS.py:180
 msgid "Process"
 msgstr "Начать"
 
-#: CMS.py:169
+#: CMS.py:184
 msgid "Clear"
 msgstr "Очистить"
 
-#: dist/CMS/tk/console.tcl:743
-msgid "Hide Fonts"
-msgstr "Скрыть шрифты"
+#~ msgid "Hide Fonts"
+#~ msgstr "Скрыть шрифты"
 
-#: dist/CMS/tk/console.tcl:745
-msgid "Show Fonts"
-msgstr "Показать шрифты"
-
-#: dist/CMS/tk/fontchooser.tcl:17
-msgid "Regular"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:18
-msgid "Italic"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:19
-msgid "Bold"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:20
-msgid "Bold Italic"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:27
-msgid "AaBbYyZz01"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:29 dist/CMS/tk/fontchooser.tcl:122
-msgid "Font"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:149
-msgid "&Font:"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:150
-msgid "Font st&yle:"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:151
-msgid "&Size:"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:170
-msgid "Effects"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:173
-msgid "Stri&keout"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:177
-msgid "&Underline"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:181
-msgid "OK"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:183
-msgid "Cancel"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:185
-msgid "&Apply"
-msgstr ""
-
-#: dist/CMS/tk/fontchooser.tcl:222
-msgid "Sample"
-msgstr ""
+#~ msgid "Show Fonts"
+#~ msgstr "Показать шрифты"
 
 #~ msgid "Source dir is: "
 #~ msgstr "Исходная директория: "
