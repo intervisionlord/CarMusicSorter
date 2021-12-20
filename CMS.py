@@ -2,6 +2,7 @@ import yaml, gettext, locale, os, re, shutil
 from sys  import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame, Text, Toplevel
 from tkinter.ttk import Button, Label
+from pathlib import Path
 
 import tkinter.filedialog as fd
 input_dir = ''
@@ -12,7 +13,7 @@ def workdirs(param):
         global input_dir
         input_dir = fd.askdirectory(title = _('Open source directory'))
         if input_dir != '':
-            source_label.config(text = input_dir)
+            source_label.config(text = f'...{path_short(input_dir, 2)}')
             printlog(_('Input DIR set to: ') + input_dir)
         else:
             input_dir = ''
@@ -20,7 +21,7 @@ def workdirs(param):
         global output_dir
         output_dir = fd.askdirectory(title = _('Set destination directory'))
         if output_dir != '':
-            dest_label.config(text = output_dir)
+            dest_label.config(text = f'...{path_short(output_dir, 2)}')
             printlog(_('Output DIR set to: ') + output_dir)
         else:
             output_dir = ''
@@ -34,6 +35,10 @@ def printlog(text):
     progress_log.config(state = 'normal')
     progress_log.insert('end', f'{text}\n')
     progress_log.config(state = 'disabled')
+
+# Сокращалка пути к директории (чтобы ничего не уезжало)
+def path_short(path_string, len):
+    return Path(*Path(path_string).parts[-len:])
 
 # Вызов "О программе"
 def popup_about(vers):
@@ -51,7 +56,7 @@ def popup_about(vers):
     imagepath = 'data/imgs/main.png'
     img = PhotoImage(file = imagepath)
     poplabel1 = Label(popup, image = img)
-    poplabel1.grid(sticky = 'W', column = 0, row = 0)
+    poplabel1.grid(sticky = 'W', column = 0, row = 0, rowspan = 2)
 
     poplabel2 = Label(popup, text = 'Car Music Sorter\n\n' + _('Version: ') + vers + \
     _('\nAuthor: ') + 'Intervision\nGithub: https://github.com/intervisionlord', justify = 'left')
@@ -149,9 +154,9 @@ menu_about.add_command(label=_('About'), command = lambda: popup_about(vers))
 window.config(menu = menu)
 # Строим элеметны основного окна и группы
 first_group = LabelFrame(window, text = _('IO Directories'))
-first_group.grid(sticky = 'W', column = 0, row = 0, padx = 5, pady = 10, ipadx = 2, ipady = 4)
+first_group.grid(sticky = 'WE', column = 0, row = 0, padx = 5, pady = 10, ipadx = 2, ipady = 4)
 operation_group = LabelFrame(window, text = _('Operations'))
-operation_group.grid(sticky = 'W', column = 0, row = 1, padx = 5, pady = 10, ipadx = 2, ipady = 4)
+operation_group.grid(sticky = 'WE', column = 0, row = 1, padx = 5, pady = 10, ipadx = 2, ipady = 4)
 progress_group = LabelFrame(window, text = _('Progress'))
 progress_group.grid(sticky = 'WSEN', column = 1, row = 0, padx = 5, pady = 10, ipadx = 0, ipady = 2, rowspan = 2)
 
