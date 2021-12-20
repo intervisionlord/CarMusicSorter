@@ -1,7 +1,7 @@
 import yaml, gettext, locale, os, re, shutil
 from sys  import exit
-from tkinter import *
-from tkinter import ttk
+from tkinter import Tk, PhotoImage, Menu, LabelFrame, Text, Toplevel
+from tkinter.ttk import Button, Label
 
 import tkinter.filedialog as fd
 input_dir = ''
@@ -31,9 +31,9 @@ def workdirs(param):
         input_dir = output_dir = ''
 
 def printlog(text):
-    progress_log.config(state = NORMAL)
-    progress_log.insert(END, f'{text}\n')
-    progress_log.config(state = DISABLED)
+    progress_log.config(state = 'normal')
+    progress_log.insert('end', f'{text}\n')
+    progress_log.config(state = 'disabled')
 
 # Вызов "О программе"
 def popup_about(vers):
@@ -54,10 +54,10 @@ def popup_about(vers):
     poplabel1.grid(sticky = 'W', column = 0, row = 0)
 
     poplabel2 = Label(popup, text = 'Car Music Sorter\n\n' + _('Version: ') + vers + \
-    _('\nAuthor: ') + 'Intervision\nGithub: https://github.com/intervisionlord', justify = LEFT)
+    _('\nAuthor: ') + 'Intervision\nGithub: https://github.com/intervisionlord', justify = 'left')
     poplabel2.grid(sticky = 'W', column = 1, row = 0)
     # Автор иконок
-    poplabel3 = Label(popup, text = _('Icons: ') + 'icon king1 on freeicons.io', justify = LEFT)
+    poplabel3 = Label(popup, text = _('Icons: ') + 'icon king1 on freeicons.io', justify = 'left')
     poplabel3.grid(sticky = 'W', column = 1, row = 1)
 
     popup.grab_set()
@@ -148,40 +148,40 @@ menu_about.add_command(label=_('About'), command = lambda: popup_about(vers))
 
 window.config(menu = menu)
 # Строим элеметны основного окна и группы
-first_group = ttk.LabelFrame(window, text = _('IO Directories'))
+first_group = LabelFrame(window, text = _('IO Directories'))
 first_group.grid(sticky = 'W', column = 0, row = 0, padx = 5, pady = 10, ipadx = 2, ipady = 4)
-operation_group = ttk.LabelFrame(window, text = _('Operations'))
+operation_group = LabelFrame(window, text = _('Operations'))
 operation_group.grid(sticky = 'W', column = 0, row = 1, padx = 5, pady = 10, ipadx = 2, ipady = 4)
-progress_group = ttk.LabelFrame(window, text = _('Progress'))
+progress_group = LabelFrame(window, text = _('Progress'))
 progress_group.grid(sticky = 'WSEN', column = 1, row = 0, padx = 5, pady = 10, ipadx = 0, ipady = 2, rowspan = 2)
 
 # 1. Пояснения
 source_label_text = _('Input DIR not defined')
 dest_label_text = _('Output DIR not defined')
 
-source_label = ttk.Label(first_group, text = source_label_text, justify = LEFT)
+source_label = Label(first_group, text = source_label_text, justify = 'left')
 source_label.grid(column = 1, row = 0)
-dest_label = Label(first_group, text = dest_label_text, justify = LEFT)
+dest_label = Label(first_group, text = dest_label_text, justify = 'left')
 dest_label.grid(column = 1, row = 1)
 
 # 2. Кнопки
-source_button = ttk.Button(first_group, text = _('Choose input DIR'), command = lambda: workdirs('indir'), \
+source_button = Button(first_group, text = _('Choose input DIR'), command = lambda: workdirs('indir'), \
 image = sourceicon, width = 20, compound = 'left')
 source_button.grid(row = 0, ipadx = 2, ipady = 2, padx = 4)
 
-dest_button = ttk.Button(first_group, text = _('Choose output DIR'), command = lambda: workdirs('outdir'), \
+dest_button = Button(first_group, text = _('Choose output DIR'), command = lambda: workdirs('outdir'), \
 image = desticon, width = 20, compound = 'left')
 dest_button.grid(row = 1, ipadx = 2, ipady = 2, padx = 4)
 
-launch_button = ttk.Button(operation_group, text = _('Process'), command = processing, \
+launch_button = Button(operation_group, text = _('Process'), command = processing, \
 image = launchicon, width = 20, compound = 'left')
 launch_button.grid(column = 0, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
-calear_button = ttk.Button(operation_group, text = _('Clear'), command = lambda: workdirs('clear'), \
+calear_button = Button(operation_group, text = _('Clear'), command = lambda: workdirs('clear'), \
 image = clearicon, width = 20, compound = 'left')
 calear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
 # 4. Лог и прогресс
-progress_log = Text(progress_group, state = DISABLED, relief = FLAT, width = 31, height = 10)
+progress_log = Text(progress_group, state = 'disabled', relief = 'flat', width = 31, height = 10)
 progress_log.grid(ipadx = 2, ipady = 2, padx = 4)
 window.mainloop()
