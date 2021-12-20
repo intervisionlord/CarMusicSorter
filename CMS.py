@@ -32,6 +32,7 @@ def workdirs(param):
         source_label.config(text = _('Input DIR not defined'))
         dest_label.config(text = _('Output DIR not defined'))
         printlog(_('Paths cleared'))
+        main_progressbar['value'] = 0
         input_dir = output_dir = ''
 
 def printlog(text):
@@ -73,6 +74,7 @@ def popup_about(vers):
     popup.mainloop()
 
 def processing():
+    prime_files = []
     if input_dir == '' or output_dir == '':
         printlog(_('Input DIR or Output DIR are not defined!'))
     elif input_dir == output_dir:
@@ -85,36 +87,52 @@ def processing():
 # Хотя, лучше искать только нужные (отбрасывать лайвы и ремиксы и перегонять уже без них)
                 filtered = re.search('.*mp3', file)
                 if filtered != None:
-                    printlog(f'{path}/{filtered.group(0)}')
-                    shutil.copyfile(f'{path}/{filtered.group(0)}', f'{output_dir}/{filtered.group(0)}')
+                    prime_files.append(file)
+                    maincopy(path, filtered.group(0), output_dir)
+    main_progressbar.config(maximum = len(prime_files))
+    printlog(len(prime_files))
 
     source_file = []
-# 3.1. Удаление ремиксов и лайвов
+# Удаление ремиксов и лайвов
     for files in os.walk(output_dir):
         for file in files[2]:
             try:
                 source_file.append(re.search('.*\(.*[Rr]emix.*\).*|.*\(.*[Ll]ive.*\).*', file).group(0))
             except:
                 pass
+    main_progressbar.config(maximum = main_progressbar['maximum'] + len(source_file))
     for file in source_file:
         printlog('Removing Remix: ' + file)
         os.remove(f'{output_dir}/{file}')
+        main_progressbar.config(value = main_progressbar['value'] + 1)
+        window.update_idletasks()
     source_file.clear() # Очищаем список
 
-# 3.2. Готовим список свежепринесенных файлов с вычищенными ремиксами и лайвами
+# Готовим список свежепринесенных файлов с вычищенными ремиксами и лайвами
     for files in os.walk(output_dir):
         for file in files[2]:
             try:
                 source_file.append(file)
             except:
                 pass
-
-# 3.3. Убираем из имен файлов мусор (номера треков в различном формате)
+    main_progressbar.config(maximum = main_progressbar['maximum'] + len(source_file))
+# Убираем из имен файлов мусор (номера треков в различном формате)
     for file in source_file:
         new_file = re.sub('^[\d{1,2}\s\-\.]*', '', file)
         shutil.move(f'{output_dir}/{file}', f'{output_dir}/{new_file}')
+        main_progressbar.config(value = main_progressbar['value'] + 1)
+        window.update_idletasks()
     source_file.clear()
     printlog(_('Completed!'))
+
+# Копируем файло =)
+def maincopy(path, filename, output_dir):
+    printlog(f'{path}/{filename}')
+    shutil.copyfile(f'{path}/{filename}', f'{output_dir}/{filename}')
+    main_progressbar['value'] += 1
+    window.update_idletasks()
+
+# TODO: Вывести запись логов в файл, убрать бокс с логом из окна.
 
 ########## END FUNCTIONS ##########
 # Проверяем конфиг
@@ -145,11 +163,11 @@ sourceicon = PhotoImage(file = 'data/imgs/20source.png')
 desticon = PhotoImage(file = 'data/imgs/20dest.png')
 launchicon = PhotoImage(file = 'data/imgs/20ok.png')
 clearicon = PhotoImage(file = 'data/imgs/20clear.png')
+
 # Основное меню
 menu = Menu(window)
 menu_about = Menu(menu, tearoff = 0)
 menu.add_cascade(label = _('Info'), menu = menu_about)
-
 # Элементы меню
 menu_about.add_command(label=_('About'), command = lambda: popup_about(vers))
 
@@ -162,7 +180,11 @@ operation_group.grid(sticky = 'WE', column = 0, row = 1, padx = 5, pady = 10, ip
 progress_group = LabelFrame(window, text = _('Progress'))
 progress_group.grid(sticky = 'WSEN', column = 1, row = 0, padx = 5, pady = 10, ipadx = 0, ipady = 2, rowspan = 2)
 
-# 1. Пояснения
+# Прогрессбар
+main_progressbar = Progressbar(progress_group, length = 255, maximum = 0, value = 0, orient = 'horizontal', mode = 'determinate')
+main_progressbar.grid(pady = 4, column = 0, row = 1)
+
+# Поясняющие лейблы
 source_label_text = _('Input DIR not defined')
 dest_label_text = _('Output DIR not defined')
 
@@ -171,7 +193,7 @@ source_label.grid(column = 1, row = 0)
 dest_label = Label(first_group, text = dest_label_text, justify = 'left')
 dest_label.grid(column = 1, row = 1)
 
-# 2. Кнопки
+# Кнопки
 source_button = Button(first_group, text = _('Choose input DIR'), command = lambda: workdirs('indir'), \
 image = sourceicon, width = 20, compound = 'left')
 source_button.grid(row = 0, ipadx = 2, ipady = 2, padx = 4)
@@ -188,7 +210,8 @@ calear_button = Button(operation_group, text = _('Clear'), command = lambda: wor
 image = clearicon, width = 20, compound = 'left')
 calear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
-# 4. Лог и прогресс
+# Лог и прогресс
 progress_log = Text(progress_group, state = 'disabled', relief = 'flat', width = 31, height = 10)
-progress_log.grid(ipadx = 2, ipady = 2, padx = 4)
+progress_log.grid(ipadx = 2, ipady = 2, padx = 4, column = 0, row = 0)
+
 window.mainloop()
