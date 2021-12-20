@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2021-12-20 16:52+0300\n"
-"PO-Revision-Date: 2021-12-20 16:54+0300\n"
+"POT-Creation-Date: 2021-12-20 19:46+0300\n"
+"PO-Revision-Date: 2021-12-20 19:46+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: ru_RU\n"
@@ -68,11 +68,15 @@ msgstr ""
 msgid "Icons: "
 msgstr "Иконки: "
 
-#: CMS.py:79
+#: CMS.py:68
+msgid "on"
+msgstr "c"
+
+#: CMS.py:80
 msgid "Input DIR or Output DIR are not defined!"
 msgstr "Исходная или конечная директории не указаны!"
 
-#: CMS.py:81
+#: CMS.py:82
 msgid "Input DIR and Output DIR must be different!"
 msgstr "Исходная и конечные директории должны отличаться!"
 

@@ -1,4 +1,4 @@
-import yaml, gettext, locale, os, re, shutil
+import yaml, gettext, locale, os, re, shutil, time
 from sys  import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame, Text, Toplevel
 from tkinter.ttk import Button, Label, Progressbar
@@ -65,7 +65,7 @@ def popup_about(vers):
     _('\nAuthor: ') + 'Intervision\nGithub: https://github.com/intervisionlord', justify = 'left')
     poplabel2.grid(sticky = 'W', column = 1, row = 0)
 # Автор иконок
-    poplabel3 = Label(popup, text = _('Icons: ') + 'icon king1 on freeicons.io', justify = 'left')
+    poplabel3 = Label(popup, text = _('Icons: ') + 'icon king1 ' + _('on') + ' freeicons.io', justify = 'left')
     poplabel3.grid(sticky = 'W', column = 1, row = 1)
 
     popup.grab_set()
@@ -73,6 +73,7 @@ def popup_about(vers):
     popup.wait_window()
     popup.mainloop()
 
+# Основные операции
 def processing():
     prime_files = []
     if input_dir == '' or output_dir == '':
@@ -89,8 +90,7 @@ def processing():
                 if filtered != None:
                     prime_files.append(file)
                     maincopy(path, filtered.group(0), output_dir)
-    main_progressbar.config(maximum = len(prime_files))
-    printlog(len(prime_files))
+    #main_progressbar.config(maximum = len(prime_files))
 
     source_file = []
 # Удаление ремиксов и лайвов
@@ -100,11 +100,11 @@ def processing():
                 source_file.append(re.search('.*\(.*[Rr]emix.*\).*|.*\(.*[Ll]ive.*\).*', file).group(0))
             except:
                 pass
-    main_progressbar.config(maximum = main_progressbar['maximum'] + len(source_file))
+    #main_progressbar.config(maximum = main_progressbar['maximum'] + len(source_file))
     for file in source_file:
         printlog('Removing Remix: ' + file)
         os.remove(f'{output_dir}/{file}')
-        main_progressbar.config(value = main_progressbar['value'] + 1)
+        main_progressbar['value'] = main_progressbar['value'] + 1
         window.update_idletasks()
     source_file.clear() # Очищаем список
 
@@ -115,12 +115,12 @@ def processing():
                 source_file.append(file)
             except:
                 pass
-    main_progressbar.config(maximum = main_progressbar['maximum'] + len(source_file))
+    #main_progressbar.config(maximum = main_progressbar['maximum'] + len(source_file))
 # Убираем из имен файлов мусор (номера треков в различном формате)
     for file in source_file:
         new_file = re.sub('^[\d{1,2}\s\-\.]*', '', file)
         shutil.move(f'{output_dir}/{file}', f'{output_dir}/{new_file}')
-        main_progressbar.config(value = main_progressbar['value'] + 1)
+        main_progressbar['value'] = main_progressbar['value'] + 1
         window.update_idletasks()
     source_file.clear()
     printlog(_('Completed!'))
@@ -129,7 +129,7 @@ def processing():
 def maincopy(path, filename, output_dir):
     printlog(f'{path}/{filename}')
     shutil.copyfile(f'{path}/{filename}', f'{output_dir}/{filename}')
-    main_progressbar['value'] += 1
+    main_progressbar['value'] = main_progressbar['value'] + 1
     window.update_idletasks()
 
 # TODO: Вывести запись логов в файл, убрать бокс с логом из окна.
@@ -181,7 +181,7 @@ progress_group = LabelFrame(window, text = _('Progress'))
 progress_group.grid(sticky = 'WSEN', column = 1, row = 0, padx = 5, pady = 10, ipadx = 0, ipady = 2, rowspan = 2)
 
 # Прогрессбар
-main_progressbar = Progressbar(progress_group, length = 255, maximum = 0, value = 0, orient = 'horizontal', mode = 'determinate')
+main_progressbar = Progressbar(progress_group, length = 255, value = 0, orient = 'horizontal', mode = 'determinate')
 main_progressbar.grid(pady = 4, column = 0, row = 1)
 
 # Поясняющие лейблы
