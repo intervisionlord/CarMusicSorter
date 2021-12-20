@@ -1,12 +1,15 @@
 import yaml, gettext, locale, os, re, shutil
 from sys  import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame, Text, Toplevel
-from tkinter.ttk import Button, Label
+from tkinter.ttk import Button, Label, Progressbar
 from pathlib import Path
 
 import tkinter.filedialog as fd
 input_dir = ''
 output_dir = ''
+
+########## BEGIN FUNCTIONS ##########
+# FIXME: Вынести по возможности в отдельные файлы
 # Определение исходной и целевой директорий
 def workdirs(param):
     if param == 'indir':
@@ -43,7 +46,7 @@ def path_short(path_string, len):
 # Вызов "О программе"
 def popup_about(vers):
 
-    # Центровка окна
+# Центровка окна
     main_width = 400
     main_height = 150
     center_x_pos = int(window.winfo_screenwidth() / 2) - main_width
@@ -51,7 +54,6 @@ def popup_about(vers):
 
     popup = Toplevel()
     popup.geometry(f'{main_width}x{main_height}+{center_x_pos}+{center_y_pos}')
-    #popup.eval('tk::PlaceWindow . center')
     popup.title(_('About'))
     imagepath = 'data/imgs/main.png'
     img = PhotoImage(file = imagepath)
@@ -61,7 +63,7 @@ def popup_about(vers):
     poplabel2 = Label(popup, text = 'Car Music Sorter\n\n' + _('Version: ') + vers + \
     _('\nAuthor: ') + 'Intervision\nGithub: https://github.com/intervisionlord', justify = 'left')
     poplabel2.grid(sticky = 'W', column = 1, row = 0)
-    # Автор иконок
+# Автор иконок
     poplabel3 = Label(popup, text = _('Icons: ') + 'icon king1 on freeicons.io', justify = 'left')
     poplabel3.grid(sticky = 'W', column = 1, row = 1)
 
@@ -79,15 +81,15 @@ def processing():
     else:
         for path, subdirs, files in os.walk(input_dir):
             for file in files:
-    # Перегоняем все MP3 в целевую директорию, потом разберемся что с ними делать
-    # Хотя, лучше искать только нужные (отбрасывать лайвы и ремиксы и перегонять уже без них)
+# Перегоняем все MP3 в целевую директорию, потом разберемся что с ними делать
+# Хотя, лучше искать только нужные (отбрасывать лайвы и ремиксы и перегонять уже без них)
                 filtered = re.search('.*mp3', file)
                 if filtered != None:
                     printlog(f'{path}/{filtered.group(0)}')
                     shutil.copyfile(f'{path}/{filtered.group(0)}', f'{output_dir}/{filtered.group(0)}')
 
     source_file = []
-    # 3.1. Удаление ремиксов и лайвов
+# 3.1. Удаление ремиксов и лайвов
     for files in os.walk(output_dir):
         for file in files[2]:
             try:
@@ -99,7 +101,7 @@ def processing():
         os.remove(f'{output_dir}/{file}')
     source_file.clear() # Очищаем список
 
-    # 3.2. Готовим список свежепринесенных файлов с вычищенными ремиксами и лайвами
+# 3.2. Готовим список свежепринесенных файлов с вычищенными ремиксами и лайвами
     for files in os.walk(output_dir):
         for file in files[2]:
             try:
@@ -107,14 +109,14 @@ def processing():
             except:
                 pass
 
-    # 3.3. Убираем из имен файлов мусор (номера треков в различном формате)
+# 3.3. Убираем из имен файлов мусор (номера треков в различном формате)
     for file in source_file:
         new_file = re.sub('^[\d{1,2}\s\-\.]*', '', file)
         shutil.move(f'{output_dir}/{file}', f'{output_dir}/{new_file}')
     source_file.clear()
     printlog(_('Completed!'))
 
-###########################################
+########## END FUNCTIONS ##########
 # Проверяем конфиг
 try:
     conffile = open('conf/main.yml', 'r')
