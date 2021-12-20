@@ -1,6 +1,13 @@
-import yaml, gettext, locale, os, re, shutil, time
-from sys  import exit
-from tkinter import Tk, PhotoImage, Menu, LabelFrame, Text, Toplevel
+import yaml
+import gettext
+# import locale
+import os
+import re
+import shutil
+
+from sys import exit
+from tkinter import Tk, PhotoImage, Menu, LabelFrame
+from tkinter import Text, Toplevel, messagebox
 from tkinter.ttk import Button, Label, Progressbar
 from pathlib import Path
 
@@ -8,9 +15,11 @@ import tkinter.filedialog as fd
 input_dir = ''
 output_dir = ''
 
-########## BEGIN FUNCTIONS ##########
+# BEGIN FUNCTIONS #
 # FIXME: Вынести по возможности в отдельные файлы
 # Определение исходной и целевой директорий
+
+
 def workdirs(param):
     if param == 'indir':
         global input_dir
@@ -35,19 +44,22 @@ def workdirs(param):
         main_progressbar['value'] = 0
         input_dir = output_dir = ''
 
+
 def printlog(text):
     progress_log.config(state = 'normal')
     progress_log.insert('end', f'{text}\n')
     progress_log.config(state = 'disabled')
 
+
 # Сокращалка пути к директории (чтобы ничего не уезжало)
 def path_short(path_string, len):
     return Path(*Path(path_string).parts[-len:])
 
+
 # Вызов "О программе"
 def popup_about(vers):
 
-# Центровка окна
+    # Центровка окна
     main_width = 400
     main_height = 150
     center_x_pos = int(window.winfo_screenwidth() / 2) - main_width
@@ -61,10 +73,10 @@ def popup_about(vers):
     poplabel1 = Label(popup, image = img)
     poplabel1.grid(sticky = 'W', column = 0, row = 0, rowspan = 2)
 
-    poplabel2 = Label(popup, text = 'Car Music Sorter\n\n' + _('Version: ') + vers + \
-    _('\nAuthor: ') + 'Intervision\nGithub: https://github.com/intervisionlord', justify = 'left')
+    # FIXME: ASAP длинно!
+    poplabel2 = Label(popup, text = 'Car Music Sorter\n\n' + _('Version: ') + vers + _('\nAuthor: ') + 'Intervision\nGithub: https://github.com/intervisionlord', justify = 'left')
     poplabel2.grid(sticky = 'W', column = 1, row = 0)
-# Автор иконок
+    # Автор иконок
     poplabel3 = Label(popup, text = _('Icons: ') + 'icon king1 ' + _('on') + ' freeicons.io', justify = 'left')
     poplabel3.grid(sticky = 'W', column = 1, row = 1)
 
@@ -72,6 +84,7 @@ def popup_about(vers):
     popup.focus_set()
     popup.wait_window()
     popup.mainloop()
+
 
 # Основные операции
 def processing():
@@ -84,29 +97,33 @@ def processing():
     else:
         for path, subdirs, files in os.walk(input_dir):
             for file in files:
-# Перегоняем все MP3 в целевую директорию, потом разберемся что с ними делать
-# Хотя, лучше искать только нужные (отбрасывать лайвы и ремиксы и перегонять уже без них)
+                # Перегоняем все MP3 в целевую директорию,
+                # потом разберемся что с ними делать
+                # Хотя, лучше искать только нужные (отбрасывать лайвы
+                # и ремиксы и перегонять уже без них)
                 filtered = re.search('.*mp3', file)
-                if filtered != None:
+                if filtered is not None:
                     prime_files.append(file)
                     maincopy(path, filtered.group(0), output_dir)
-    #main_progressbar.config(maximum = len(prime_files))
+    # main_progressbar.config(maximum = len(prime_files))
 
     source_file = []
 # Удаление ремиксов и лайвов
+    liveregexp = r'.*\(.*[Rr]emix.*\).*|.*\(.*[Ll]ive.*\).*'
     for files in os.walk(output_dir):
         for file in files[2]:
             try:
-                source_file.append(re.search('.*\(.*[Rr]emix.*\).*|.*\(.*[Ll]ive.*\).*', file).group(0))
+                source_file.append(re.search(liveregexp, file).group(0))
             except:
                 pass
-    #main_progressbar.config(maximum = main_progressbar['maximum'] + len(source_file))
+    # main_progressbar.config(maximum =
+    # main_progressbar['maximum'] + len(source_file))
     for file in source_file:
         printlog('Removing Remix: ' + file)
         os.remove(f'{output_dir}/{file}')
         main_progressbar['value'] = main_progressbar['value'] + 1
         window.update_idletasks()
-    source_file.clear() # Очищаем список
+    source_file.clear()  # Очищаем список
 
 # Готовим список свежепринесенных файлов с вычищенными ремиксами и лайвами
     for files in os.walk(output_dir):
@@ -115,15 +132,19 @@ def processing():
                 source_file.append(file)
             except:
                 pass
-    #main_progressbar.config(maximum = main_progressbar['maximum'] + len(source_file))
-# Убираем из имен файлов мусор (номера треков в различном формате)
+    # main_progressbar.config(maximum =
+    # main_progressbar['maximum'] + len(source_file))
+
+    # Убираем из имен файлов мусор (номера треков в различном формате)
+    trashregexp = r'^[\d{1,2}\s\-\.]*'
     for file in source_file:
-        new_file = re.sub('^[\d{1,2}\s\-\.]*', '', file)
+        new_file = re.sub(trashregexp, '', file)
         shutil.move(f'{output_dir}/{file}', f'{output_dir}/{new_file}')
         main_progressbar['value'] = main_progressbar['value'] + 1
         window.update_idletasks()
     source_file.clear()
     printlog(_('Completed!'))
+
 
 # Копируем файло =)
 def maincopy(path, filename, output_dir):
@@ -134,11 +155,13 @@ def maincopy(path, filename, output_dir):
 
 # TODO: Вывести запись логов в файл, убрать бокс с логом из окна.
 
-########## END FUNCTIONS ##########
+# END FUNCTIONS #
 # Проверяем конфиг
+
+
 try:
     conffile = open('conf/main.yml', 'r')
-except:
+except IOError:  # FIXME: Убрать exit() в результате эксепшена
     exit(messagebox.showerror('ERROR', 'Config file not found'))
 
 config = yaml.full_load(conffile)
@@ -146,10 +169,10 @@ conffile.close()
 
 # Вводим основные переменные
 vers = config['core']['version']
-locale = config['settings']['locale']
+langcode = config['settings']['locale']
 # Локализация
-gettext.translation('CarMusicSorter', localedir='l10n', languages=[locale]).install()
-
+gettext.translation('CarMusicSorter', localedir='l10n',
+                    languages=[langcode]).install()
 # Рисуем окно
 window = Tk()
 
@@ -174,14 +197,21 @@ menu_about.add_command(label=_('About'), command = lambda: popup_about(vers))
 window.config(menu = menu)
 # Строим элеметны основного окна и группы
 first_group = LabelFrame(window, text = _('IO Directories'))
-first_group.grid(sticky = 'WE', column = 0, row = 0, padx = 5, pady = 10, ipadx = 2, ipady = 4)
+
+first_group.grid(sticky = 'WE', column = 0, row = 0, padx = 5, pady = 10,
+                 ipadx = 2, ipady = 4)
+
 operation_group = LabelFrame(window, text = _('Operations'))
-operation_group.grid(sticky = 'WE', column = 0, row = 1, padx = 5, pady = 10, ipadx = 2, ipady = 4)
+operation_group.grid(sticky = 'WE', column = 0, row = 1, padx = 5, pady = 10,
+                     ipadx = 2, ipady = 4)
+
 progress_group = LabelFrame(window, text = _('Progress'))
-progress_group.grid(sticky = 'WSEN', column = 1, row = 0, padx = 5, pady = 10, ipadx = 0, ipady = 2, rowspan = 2)
+progress_group.grid(sticky = 'WSEN', column = 1, row = 0, padx = 5, pady = 10,
+                    ipadx = 0, ipady = 2, rowspan = 2)
 
 # Прогрессбар
-main_progressbar = Progressbar(progress_group, length = 255, value = 0, orient = 'horizontal', mode = 'determinate')
+main_progressbar = Progressbar(progress_group, length = 255, value = 0,
+                               orient = 'horizontal', mode = 'determinate')
 main_progressbar.grid(pady = 4, column = 0, row = 1)
 
 # Поясняющие лейблы
@@ -194,24 +224,30 @@ dest_label = Label(first_group, text = dest_label_text, justify = 'left')
 dest_label.grid(column = 1, row = 1)
 
 # Кнопки
-source_button = Button(first_group, text = _('Choose input DIR'), command = lambda: workdirs('indir'), \
-image = sourceicon, width = 20, compound = 'left')
+source_button = Button(first_group, text = _('Choose input DIR'),
+                       command = lambda: workdirs('indir'), image = sourceicon,
+                       width = 20, compound = 'left')
 source_button.grid(row = 0, ipadx = 2, ipady = 2, padx = 4)
 
-dest_button = Button(first_group, text = _('Choose output DIR'), command = lambda: workdirs('outdir'), \
-image = desticon, width = 20, compound = 'left')
+dest_button = Button(first_group, text = _('Choose output DIR'),
+                     command = lambda: workdirs('outdir'), image = desticon,
+                     width = 20, compound = 'left')
 dest_button.grid(row = 1, ipadx = 2, ipady = 2, padx = 4)
 
-launch_button = Button(operation_group, text = _('Process'), command = processing, \
-image = launchicon, width = 20, compound = 'left')
+launch_button = Button(operation_group, text = _('Process'),
+                       command = processing, image = launchicon,
+                       width = 20, compound = 'left')
 launch_button.grid(column = 0, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
-calear_button = Button(operation_group, text = _('Clear'), command = lambda: workdirs('clear'), \
-image = clearicon, width = 20, compound = 'left')
+calear_button = Button(operation_group, text = _('Clear'),
+                       command = lambda: workdirs('clear'), image = clearicon,
+                       width = 20, compound = 'left')
+
 calear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
 # Лог и прогресс
-progress_log = Text(progress_group, state = 'disabled', relief = 'flat', width = 31, height = 10)
+progress_log = Text(progress_group, state = 'disabled', relief = 'flat',
+                    width = 31, height = 10)
 progress_log.grid(ipadx = 2, ipady = 2, padx = 4, column = 0, row = 0)
 
 window.mainloop()
