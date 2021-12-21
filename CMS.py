@@ -1,6 +1,5 @@
 import yaml
 import gettext
-# import locale
 import os
 import re
 import shutil
@@ -15,11 +14,10 @@ import tkinter.filedialog as fd
 input_dir = ''
 output_dir = ''
 
+
 # BEGIN FUNCTIONS #
 # FIXME: Вынести по возможности в отдельные файлы
 # Определение исходной и целевой директорий
-
-
 def workdirs(param):
     if param == 'indir':
         global input_dir
@@ -74,11 +72,17 @@ def popup_about(vers):
     poplabel1.grid(sticky = 'W', column = 0, row = 0, rowspan = 2)
 
     # FIXME: ASAP длинно!
-    poplabel2 = Label(popup, text = 'Car Music Sorter\n\n' + _('Version: ') + vers + _('\nAuthor: ') + 'Intervision\nGithub: https://github.com/intervisionlord', justify = 'left')
-    poplabel2.grid(sticky = 'W', column = 1, row = 0)
+    name_vers_str = 'Car Music Sorter\n\n' + _('Version: ') + vers
+    author_github = 'https://github.com/intervisionlord'
+    prog_author = _('\nAuthor: ') + 'Intervision\nGithub: ' + author_github
+    poplabel_maindesc = Label(popup,
+                              text = name_vers_str + prog_author,
+                              justify = 'left')
+    poplabel_maindesc.grid(sticky = 'W', column = 1, row = 0)
     # Автор иконок
-    poplabel3 = Label(popup, text = _('Icons: ') + 'icon king1 ' + _('on') + ' freeicons.io', justify = 'left')
-    poplabel3.grid(sticky = 'W', column = 1, row = 1)
+    icons_author = _('Icons: ') + 'icon king1 ' + _('on') + ' freeicons.io'
+    poplabel_icons = Label(popup, text = icons_author, justify = 'left')
+    poplabel_icons.grid(sticky = 'W', column = 1, row = 1)
 
     popup.grab_set()
     popup.focus_set()
@@ -114,7 +118,7 @@ def processing():
         for file in files[2]:
             try:
                 source_file.append(re.search(liveregexp, file).group(0))
-            except:
+            except Exception:
                 pass
     # main_progressbar.config(maximum =
     # main_progressbar['maximum'] + len(source_file))
@@ -130,10 +134,8 @@ def processing():
         for file in files[2]:
             try:
                 source_file.append(file)
-            except:
+            except Exception:
                 pass
-    # main_progressbar.config(maximum =
-    # main_progressbar['maximum'] + len(source_file))
 
     # Убираем из имен файлов мусор (номера треков в различном формате)
     trashregexp = r'^[\d{1,2}\s\-\.]*'
@@ -146,7 +148,7 @@ def processing():
     printlog(_('Completed!'))
 
 
-# Копируем файло =)
+# Копируем файлы
 def maincopy(path, filename, output_dir):
     printlog(f'{path}/{filename}')
     shutil.copyfile(f'{path}/{filename}', f'{output_dir}/{filename}')
@@ -154,11 +156,10 @@ def maincopy(path, filename, output_dir):
     window.update_idletasks()
 
 # TODO: Вывести запись логов в файл, убрать бокс с логом из окна.
-
 # END FUNCTIONS #
+
+
 # Проверяем конфиг
-
-
 try:
     conffile = open('conf/main.yml', 'r')
 except IOError:  # FIXME: Убрать exit() в результате эксепшена
@@ -190,9 +191,16 @@ clearicon = PhotoImage(file = 'data/imgs/20clear.png')
 # Основное меню
 menu = Menu(window)
 menu_about = Menu(menu, tearoff = 0)
+menu_file = Menu(menu, tearoff = 0)
+menu.add_cascade(label = _('File'), menu = menu_file)
 menu.add_cascade(label = _('Info'), menu = menu_about)
 # Элементы меню
-menu_about.add_command(label=_('About'), command = lambda: popup_about(vers))
+menu_about.add_command(label = _('About'), command = lambda: popup_about(vers))
+
+menu_file.add_command(label = _('Input Dir'),
+                      command = lambda: workdirs('indir'))
+menu_file.add_command(label = _('Output Dir'),
+                      command = lambda: workdirs('outdirs'))
 
 window.config(menu = menu)
 # Строим элеметны основного окна и группы
@@ -224,12 +232,12 @@ dest_label = Label(first_group, text = dest_label_text, justify = 'left')
 dest_label.grid(column = 1, row = 1)
 
 # Кнопки
-source_button = Button(first_group, text = _('Choose input DIR'),
+source_button = Button(first_group, text = _('Input Dir'),
                        command = lambda: workdirs('indir'), image = sourceicon,
                        width = 20, compound = 'left')
 source_button.grid(row = 0, ipadx = 2, ipady = 2, padx = 4)
 
-dest_button = Button(first_group, text = _('Choose output DIR'),
+dest_button = Button(first_group, text = _('Output Dir'),
                      command = lambda: workdirs('outdir'), image = desticon,
                      width = 20, compound = 'left')
 dest_button.grid(row = 1, ipadx = 2, ipady = 2, padx = 4)
