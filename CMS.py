@@ -1,3 +1,4 @@
+"""Car Music Sorter."""
 import yaml
 import gettext
 import os
@@ -14,11 +15,14 @@ import tkinter.filedialog as fd
 input_dir = ''
 output_dir = ''
 
+source_file = []
+
 
 # BEGIN FUNCTIONS #
 # FIXME: Вынести по возможности в отдельные файлы
 # Определение исходной и целевой директорий
 def workdirs(param):
+    """Открывает диалог выбора директории."""
     if param == 'indir':
         global input_dir
         input_dir = fd.askdirectory(title = _('Open source directory'))
@@ -44,19 +48,21 @@ def workdirs(param):
 
 
 def printlog(text):
+    """Пишет лог операции в TextBox."""
     progress_log.config(state = 'normal')
     progress_log.insert('end', f'{text}\n')
     progress_log.config(state = 'disabled')
+    progress_log.see('end')
 
 
-# Сокращалка пути к директории (чтобы ничего не уезжало)
 def path_short(path_string, len):
+    """Сокращает путь для корректного отображения в лейбле."""
     return Path(*Path(path_string).parts[-len:])
 
 
 # Вызов "О программе"
 def popup_about(vers):
-
+    """Открывает окно 'О программе'."""
     # Центровка окна
     main_width = 400
     main_height = 150
@@ -71,7 +77,6 @@ def popup_about(vers):
     poplabel1 = Label(popup, image = img)
     poplabel1.grid(sticky = 'W', column = 0, row = 0, rowspan = 2)
 
-    # FIXME: ASAP длинно!
     name_vers_str = 'Car Music Sorter\n\n' + _('Version: ') + vers
     author_github = 'https://github.com/intervisionlord'
     prog_author = _('\nAuthor: ') + 'Intervision\nGithub: ' + author_github
@@ -87,12 +92,11 @@ def popup_about(vers):
     popup.grab_set()
     popup.focus_set()
     popup.wait_window()
-    popup.mainloop()
 
 
 # Основные операции
-def processing():
-    prime_files = []
+def check_paths():
+    """Проверяет, что все пути заданы корректно и запускает копирование."""
     if input_dir == '' or output_dir == '':
         printlog(_('Input DIR or Output DIR are not defined!'))
     elif input_dir == output_dir:
@@ -107,11 +111,16 @@ def processing():
                 # и ремиксы и перегонять уже без них)
                 filtered = re.search('.*mp3', file)
                 if filtered is not None:
-                    prime_files.append(file)
-                    maincopy(path, filtered.group(0), output_dir)
-    # main_progressbar.config(maximum = len(prime_files))
+                    source_file.append(f'{path}/{filtered.group(0)}')
+    main_progressbar['maximum'] = len(source_file)
+    for files in source_file:
+        maincopy(files, output_dir)
+    source_file.clear()
 
-    source_file = []
+
+def processing():
+    """Удаляет ремиксы и лайвы."""
+    check_paths()
 # Удаление ремиксов и лайвов
     liveregexp = r'.*\(.*[Rr]emix.*\).*|.*\(.*[Ll]ive.*\).*'
     for files in os.walk(output_dir):
@@ -120,15 +129,17 @@ def processing():
                 source_file.append(re.search(liveregexp, file).group(0))
             except Exception:
                 pass
-    # main_progressbar.config(maximum =
-    # main_progressbar['maximum'] + len(source_file))
     for file in source_file:
         printlog('Removing Remix: ' + file)
         os.remove(f'{output_dir}/{file}')
         main_progressbar['value'] = main_progressbar['value'] + 1
         window.update_idletasks()
     source_file.clear()  # Очищаем список
+    polish_filenames()
 
+
+def polish_filenames():
+    """Удаляет из имен треков мусор."""
 # Готовим список свежепринесенных файлов с вычищенными ремиксами и лайвами
     for files in os.walk(output_dir):
         for file in files[2]:
@@ -138,6 +149,8 @@ def processing():
                 pass
 
     # Убираем из имен файлов мусор (номера треков в различном формате)
+    main_progressbar['maximum'] = (main_progressbar['maximum'] +
+                                   len(source_file))
     trashregexp = r'^[\d{1,2}\s\-\.]*'
     for file in source_file:
         new_file = re.sub(trashregexp, '', file)
@@ -149,12 +162,14 @@ def processing():
 
 
 # Копируем файлы
-def maincopy(path, filename, output_dir):
-    printlog(f'{path}/{filename}')
-    shutil.copyfile(f'{path}/{filename}', f'{output_dir}/{filename}')
+def maincopy(files, output_dir):
+    """Копирует файлы."""
+    printlog(f'{files}')
+    filename = str.split(files, '/')
+    printlog(filename[-1])
+    shutil.copyfile(f'{files}', f'{output_dir}/{filename[-1]}')
     main_progressbar['value'] = main_progressbar['value'] + 1
     window.update_idletasks()
-
 # TODO: Вывести запись логов в файл, убрать бокс с логом из окна.
 # END FUNCTIONS #
 
@@ -247,11 +262,11 @@ launch_button = Button(operation_group, text = _('Process'),
                        width = 20, compound = 'left')
 launch_button.grid(column = 0, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
-calear_button = Button(operation_group, text = _('Clear'),
-                       command = lambda: workdirs('clear'), image = clearicon,
-                       width = 20, compound = 'left')
+clear_button = Button(operation_group, text = _('Clear'),
+                      command = lambda: workdirs('clear'), image = clearicon,
+                      width = 20, compound = 'left')
 
-calear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
+clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
 # Лог и прогресс
 progress_log = Text(progress_group, state = 'disabled', relief = 'flat',
