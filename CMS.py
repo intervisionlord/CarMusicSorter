@@ -211,14 +211,33 @@ menu_file = Menu(menu, tearoff = 0)
 menu.add_cascade(label = _('File'), menu = menu_file)
 menu.add_cascade(label = _('Info'), menu = menu_about)
 # Элементы меню
-menu_about.add_command(label = _('About'), command = lambda: popup_about(vers))
+menu_about.add_command(label = _('About'),
+                       command = lambda: popup_about(vers),
+                       accelerator = 'F1')
 
 menu_file.add_command(label = _('Input Dir'),
-                      command = lambda: workdirs('indir'))
+                      command = lambda: workdirs('indir'),
+                      accelerator = 'CTRL+O')
 menu_file.add_command(label = _('Output Dir'),
-                      command = lambda: workdirs('outdirs'))
+                      command = lambda: workdirs('outdirs'),
+                      accelerator = 'CTRL+D')
+menu_file.add_command(label = _('Clear'),
+                      command = lambda: workdirs('clear'),
+                      accelerator = 'CTRL+R')
+menu_file.add_separator()
 menu_file.add_command(label = _('Settings'),
                       command = w_settings.popup_settings)
+menu_file.add_separator()
+menu_file.add_command(label = _('Exit'),
+                      command = exit,
+                      accelerator = 'CTRL+E')
+
+menu_file.bind_all('<Command-o>', lambda event: workdirs('indir'))
+menu_file.bind_all('<Command-d>', lambda event: workdirs('outdir'))
+menu_file.bind_all('<Command-r>', lambda event: workdirs('clear'))
+menu_file.bind_all('<Command-e>', exit)
+
+menu_about.bind_all('<F1>', lambda event: popup_about(vers))
 
 window.config(menu = menu)
 # Строим элеметны основного окна и группы
