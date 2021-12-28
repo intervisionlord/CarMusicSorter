@@ -4,6 +4,7 @@ import gettext
 import os
 import re
 import shutil
+import w_settings
 
 from sys import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame
@@ -216,6 +217,8 @@ menu_file.add_command(label = _('Input Dir'),
                       command = lambda: workdirs('indir'))
 menu_file.add_command(label = _('Output Dir'),
                       command = lambda: workdirs('outdirs'))
+menu_file.add_command(label = _('Settings'),
+                      command = w_settings.popup_settings)
 
 window.config(menu = menu)
 # Строим элеметны основного окна и группы
@@ -265,6 +268,10 @@ launch_button.grid(column = 0, row = 2, ipadx = 2, ipady = 2, padx = 4)
 clear_button = Button(operation_group, text = _('Clear'),
                       command = lambda: workdirs('clear'), image = clearicon,
                       width = 20, compound = 'left')
+
+#clear_button = Button(operation_group, text = _('Clear'),
+#                      command = lambda: w_settings.popup_settings(window), image = clearicon,
+#                      width = 20, compound = 'left')
 
 clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 

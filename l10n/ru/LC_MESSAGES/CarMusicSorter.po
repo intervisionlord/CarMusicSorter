@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2021-12-21 12:29+0300\n"
-"PO-Revision-Date: 2021-12-21 12:30+0300\n"
+"POT-Creation-Date: 2021-12-28 19:58+0300\n"
+"PO-Revision-Date: 2021-12-28 19:58+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: ru_RU\n"
@@ -20,43 +20,43 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: CMS.py:24
+#: CMS.py:29
 msgid "Open source directory"
 msgstr "Открыть исходную директорию"
 
-#: CMS.py:27
+#: CMS.py:32
 msgid "Input DIR set to: "
 msgstr "Исходная директория: "
 
-#: CMS.py:32
+#: CMS.py:37
 msgid "Set destination directory"
 msgstr "Указать конечную директорию"
 
-#: CMS.py:35
+#: CMS.py:40
 msgid "Output DIR set to: "
 msgstr "Конечная директория: "
 
-#: CMS.py:39 CMS.py:218
+#: CMS.py:44 CMS.py:244
 msgid "Input DIR not defined"
 msgstr "Исходная директория не указана"
 
-#: CMS.py:40 CMS.py:219
+#: CMS.py:45 CMS.py:245
 msgid "Output DIR not defined"
 msgstr "Конечная директория не указана"
 
-#: CMS.py:41
+#: CMS.py:46
 msgid "Paths cleared"
 msgstr "Пути очищены"
 
-#: CMS.py:68 CMS.py:192
+#: CMS.py:75 CMS.py:214
 msgid "About"
 msgstr "О программе"
 
-#: CMS.py:75
+#: CMS.py:81
 msgid "Version: "
 msgstr "Версия: "
 
-#: CMS.py:75
+#: CMS.py:83
 msgid ""
 "\n"
 "Author: "
@@ -64,69 +64,75 @@ msgstr ""
 "\n"
 "Разработчик: "
 
-#: CMS.py:78
+#: CMS.py:89
 msgid "Icons: "
 msgstr "Иконки: "
 
-#: CMS.py:78
+#: CMS.py:89
 msgid "on"
 msgstr "c"
 
-#: CMS.py:91
+#: CMS.py:102
 msgid "Input DIR or Output DIR are not defined!"
 msgstr "Исходная или конечная директории не указаны!"
 
-#: CMS.py:93
+#: CMS.py:104
 msgid "Input DIR and Output DIR must be different!"
 msgstr "Исходная и конечные директории должны отличаться!"
 
-#: CMS.py:142
+#: CMS.py:162
 msgid "Completed!"
 msgstr "Выполнено!"
 
-#: CMS.py:189
+#: CMS.py:211
 msgid "File"
 msgstr "Файл"
 
-#: CMS.py:190
+#: CMS.py:212
 msgid "Info"
 msgstr "Справка"
 
-#: CMS.py:194
+#: CMS.py:216 CMS.py:253
 msgid "Input Dir"
 msgstr "Исходная директория"
 
-#: CMS.py:195
+#: CMS.py:218 CMS.py:258
 msgid "Output Dir"
 msgstr "Конечная директория"
 
-#: CMS.py:199
+#: CMS.py:220 w_settings.py:25
+msgid "Settings"
+msgstr "Настройки"
+
+#: CMS.py:225
 msgid "IO Directories"
 msgstr "Начальная / Конечная директории"
 
-#: CMS.py:204
+#: CMS.py:230
 msgid "Operations"
 msgstr "Операции"
 
-#: CMS.py:208
+#: CMS.py:234
 msgid "Progress"
 msgstr "Прогресс"
 
-#: CMS.py:227
-msgid "Choose input DIR"
-msgstr "Исходная директория"
-
-#: CMS.py:232
-msgid "Choose output DIR"
-msgstr "Конечная директория"
-
-#: CMS.py:237
+#: CMS.py:263
 msgid "Process"
 msgstr "Начать"
 
-#: CMS.py:242
+#: CMS.py:268
 msgid "Clear"
 msgstr "Очистить"
+
+#: w_settings.py:26
+msgid "Language"
+msgstr "Язык"
+
+#~ msgid "Choose input DIR"
+#~ msgstr "Исходная директория"
+
+#~ msgid "Choose output DIR"
+#~ msgstr "Конечная директория"
 
 #~ msgid "Hide Fonts"
 #~ msgstr "Скрыть шрифты"
