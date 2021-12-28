@@ -64,7 +64,7 @@ def path_short(path_string, len):
 # Вызов "О программе"
 def popup_about(vers):
     """Открывает окно 'О программе'."""
-    # Центровка окна
+# Центровка окна
     main_width = 400
     main_height = 150
     center_x_pos = int(window.winfo_screenwidth() / 2) - main_width
@@ -85,7 +85,7 @@ def popup_about(vers):
                               text = name_vers_str + prog_author,
                               justify = 'left')
     poplabel_maindesc.grid(sticky = 'W', column = 1, row = 0)
-    # Автор иконок
+# Автор иконок
     icons_author = _('Icons: ') + 'icon king1 ' + _('on') + ' freeicons.io'
     poplabel_icons = Label(popup, text = icons_author, justify = 'left')
     poplabel_icons.grid(sticky = 'W', column = 1, row = 1)
@@ -149,7 +149,7 @@ def polish_filenames():
             except Exception:
                 pass
 
-    # Убираем из имен файлов мусор (номера треков в различном формате)
+# Убираем из имен файлов мусор (номера треков в различном формате)
     main_progressbar['maximum'] = (main_progressbar['maximum'] +
                                    len(source_file))
     trashregexp = r'^[\d{1,2}\s\-\.]*'
@@ -269,15 +269,10 @@ clear_button = Button(operation_group, text = _('Clear'),
                       command = lambda: workdirs('clear'), image = clearicon,
                       width = 20, compound = 'left')
 
-#clear_button = Button(operation_group, text = _('Clear'),
-#                      command = lambda: w_settings.popup_settings(window), image = clearicon,
-#                      width = 20, compound = 'left')
-
 clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
 # Лог и прогресс
 progress_log = Text(progress_group, state = 'disabled', relief = 'flat',
                     width = 31, height = 10)
 progress_log.grid(ipadx = 2, ipady = 2, padx = 4, column = 0, row = 0)
-
 window.mainloop()
