@@ -4,8 +4,8 @@
 ---
 
 1. [Общие сведения](#summary)
-  * [Интерфейс](#interface)
-  * [Версии](#versions)
+    * [Интерфейс](#interface)
+    * [Версии](#versions)
 1. [Использование](#usage)
 1. [Локализация](#localization)
 
