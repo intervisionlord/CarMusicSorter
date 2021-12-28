@@ -1,0 +1,148 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: carmusicsorter\n"
+"POT-Creation-Date: 2021-12-21 12:29+0300\n"
+"PO-Revision-Date: 2021-12-28 17:48\n"
+"Last-Translator: Intervision\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Crowdin-Project: carmusicsorter\n"
+"X-Crowdin-Project-ID: 491863\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /master/l10n/ru/LC_MESSAGES/CarMusicSorter.po\n"
+"X-Crowdin-File-ID: 13\n"
+
+#: CMS.py:24
+msgid "Open source directory"
+msgstr ""
+
+#: CMS.py:27
+msgid "Input DIR set to: "
+msgstr ""
+
+#: CMS.py:32
+msgid "Set destination directory"
+msgstr ""
+
+#: CMS.py:35
+msgid "Output DIR set to: "
+msgstr ""
+
+#: CMS.py:39 CMS.py:218
+msgid "Input DIR not defined"
+msgstr ""
+
+#: CMS.py:40 CMS.py:219
+msgid "Output DIR not defined"
+msgstr ""
+
+#: CMS.py:41
+msgid "Paths cleared"
+msgstr ""
+
+#: CMS.py:68 CMS.py:192
+msgid "About"
+msgstr ""
+
+#: CMS.py:75
+msgid "Version: "
+msgstr ""
+
+#: CMS.py:75
+msgid "\n"
+"Author: "
+msgstr ""
+
+#: CMS.py:78
+msgid "Icons: "
+msgstr ""
+
+#: CMS.py:78
+msgid "on"
+msgstr ""
+
+#: CMS.py:91
+msgid "Input DIR or Output DIR are not defined!"
+msgstr ""
+
+#: CMS.py:93
+msgid "Input DIR and Output DIR must be different!"
+msgstr ""
+
+#: CMS.py:142
+msgid "Completed!"
+msgstr ""
+
+#: CMS.py:189
+msgid "File"
+msgstr ""
+
+#: CMS.py:190
+msgid "Info"
+msgstr ""
+
+#: CMS.py:194
+msgid "Input Dir"
+msgstr ""
+
+#: CMS.py:195
+msgid "Output Dir"
+msgstr ""
+
+#: CMS.py:199
+msgid "IO Directories"
+msgstr ""
+
+#: CMS.py:204
+msgid "Operations"
+msgstr ""
+
+#: CMS.py:208
+msgid "Progress"
+msgstr ""
+
+#: CMS.py:227
+msgid "Choose input DIR"
+msgstr ""
+
+#: CMS.py:232
+msgid "Choose output DIR"
+msgstr ""
+
+#: CMS.py:237
+msgid "Process"
+msgstr ""
+
+#: CMS.py:242
+msgid "Clear"
+msgstr ""
+
+#~ msgid "Hide Fonts"
+#~ msgstr "Скрыть шрифты"
+
+#~ msgid "Show Fonts"
+#~ msgstr "Показать шрифты"
+
+#~ msgid "Source dir is: "
+#~ msgstr "Исходная директория: "
+
+#~ msgid "Destination dir is: "
+#~ msgstr "Конечная директория: "
+
+#~ msgid "Browse"
+#~ msgstr "Обзор"
+
+#~ msgid "Begin!"
+#~ msgstr "Начать!"
+
+#~ msgid "Choose directory where tracks were taken from"
+#~ msgstr "Выберите директорию, из которой будут взяты треки"
+
