@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2021-12-28 19:58+0300\n"
-"PO-Revision-Date: 2021-12-28 19:58+0300\n"
+"POT-Creation-Date: 2021-12-29 12:12+0300\n"
+"PO-Revision-Date: 2021-12-29 12:15+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: ru_RU\n"
@@ -36,11 +36,11 @@ msgstr "Указать конечную директорию"
 msgid "Output DIR set to: "
 msgstr "Конечная директория: "
 
-#: CMS.py:44 CMS.py:244
+#: CMS.py:44 CMS.py:263
 msgid "Input DIR not defined"
 msgstr "Исходная директория не указана"
 
-#: CMS.py:45 CMS.py:245
+#: CMS.py:45 CMS.py:264
 msgid "Output DIR not defined"
 msgstr "Конечная директория не указана"
 
@@ -92,41 +92,48 @@ msgstr "Файл"
 msgid "Info"
 msgstr "Справка"
 
-#: CMS.py:216 CMS.py:253
+#: CMS.py:218 CMS.py:272
 msgid "Input Dir"
 msgstr "Исходная директория"
 
-#: CMS.py:218 CMS.py:258
+#: CMS.py:221 CMS.py:277
 msgid "Output Dir"
 msgstr "Конечная директория"
 
-#: CMS.py:220 w_settings.py:25
-msgid "Settings"
-msgstr "Настройки"
-
-#: CMS.py:225
-msgid "IO Directories"
-msgstr "Начальная / Конечная директории"
-
-#: CMS.py:230
-msgid "Operations"
-msgstr "Операции"
-
-#: CMS.py:234
-msgid "Progress"
-msgstr "Прогресс"
-
-#: CMS.py:263
-msgid "Process"
-msgstr "Начать"
-
-#: CMS.py:268
+#: CMS.py:224 CMS.py:287
 msgid "Clear"
 msgstr "Очистить"
 
-#: w_settings.py:26
-msgid "Language"
-msgstr "Язык"
+#: CMS.py:228 w_settings.py:30 w_settings.py:31
+msgid "Settings"
+msgstr "Настройки"
+
+#: CMS.py:231
+msgid "Exit"
+msgstr "Выход"
+
+#: CMS.py:244
+msgid "IO Directories"
+msgstr "Начальная / Конечная директории"
+
+#: CMS.py:249
+msgid "Operations"
+msgstr "Операции"
+
+#: CMS.py:253
+msgid "Progress"
+msgstr "Прогресс"
+
+#: CMS.py:282
+msgid "Process"
+msgstr "Начать"
+
+#: w_settings.py:37
+msgid "Apply"
+msgstr "Применить"
+
+#~ msgid "Language"
+#~ msgstr "Язык"
 
 #~ msgid "Choose input DIR"
 #~ msgstr "Исходная директория"
