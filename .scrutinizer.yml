@@ -8,12 +8,12 @@ filter:
         - tests/*
 
 build:
-  project_setup:
-    override:
-      - pip install coverage pytest re yaml tkinter shutil gettext
   nodes:
     analysis:
       tests:
+        project_setup:
+          override:
+            - pip install coverage pytest re yaml tkinter shutil gettext
         override:
           - py-scrutinizer-run
           - command: 'coverage run -m pytest'
