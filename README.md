@@ -1,6 +1,6 @@
 # <img src="https://i.imgur.com/dSzqaaP.png"  width=50 alt="Car Music Sorter Icon"> Car Music Sorter
 
-[![Crowdin](https://badges.crowdin.net/carmusicsorter/localized.svg)](https://crowdin.com/project/carmusicsorter)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Утилита для извлечения треков из субдиректорий исполнителя (альбомов) и сохранении их в единой директории с названием исполнителя для последующей загрузки на флешку для автомагнитолы.
 
