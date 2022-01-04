@@ -8,15 +8,16 @@ filter:
         - tests/*
 
 build:
-  project_setup:
-    override:
-      - pip install coverage pytest yaml gettext shutil re tkinter pathlib
   nodes:
     analysis:
       tests:
         override:
           - py-scrutinizer-run
           - command: 'coverage run -m pytest'
-          coverage:
-            file: '.coverage'
-            format: 'py-cc'
+            coverage:
+              file: '.coverage'
+              format: 'py-cc'
+                project_setup:
+                  override:
+                    - pip install coverage
+                    - pip install pytest
