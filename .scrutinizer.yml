@@ -14,9 +14,9 @@ build:
                     -
                         command: pylint-run
                         use_website_config: true
-                  coverage:
-                    file: .coverage
-                    format: python-cc
+                    coverage:
+                      file: .coverage
+                      format: python-cc
 filter:
     excluded_paths:
         - '*/test/*'
