@@ -4,6 +4,7 @@ import gettext
 import os
 import re
 import shutil
+import w_settings
 
 from sys import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame
@@ -63,7 +64,7 @@ def path_short(path_string, len):
 # Вызов "О программе"
 def popup_about(vers):
     """Открывает окно 'О программе'."""
-    # Центровка окна
+# Центровка окна
     main_width = 400
     main_height = 150
     center_x_pos = int(window.winfo_screenwidth() / 2) - main_width
@@ -84,7 +85,7 @@ def popup_about(vers):
                               text = name_vers_str + prog_author,
                               justify = 'left')
     poplabel_maindesc.grid(sticky = 'W', column = 1, row = 0)
-    # Автор иконок
+# Автор иконок
     icons_author = _('Icons: ') + 'icon king1 ' + _('on') + ' freeicons.io'
     poplabel_icons = Label(popup, text = icons_author, justify = 'left')
     poplabel_icons.grid(sticky = 'W', column = 1, row = 1)
@@ -148,7 +149,7 @@ def polish_filenames():
             except Exception:
                 pass
 
-    # Убираем из имен файлов мусор (номера треков в различном формате)
+# Убираем из имен файлов мусор (номера треков в различном формате)
     main_progressbar['maximum'] = (main_progressbar['maximum'] +
                                    len(source_file))
     trashregexp = r'^[\d{1,2}\s\-\.]*'
@@ -175,17 +176,21 @@ def maincopy(files, output_dir):
 
 
 # Проверяем конфиг
-try:
-    conffile = open('conf/main.yml', 'r')
-except IOError:  # FIXME: Убрать exit() в результате эксепшена
-    exit(messagebox.showerror('ERROR', 'Config file not found'))
+def getconfig():
+    """Определяет наличие конфига и загружает его."""
+    try:
+        conffile = open('conf/main.yml', 'r')
+    except IOError:  # FIXME: Убрать exit() в результате эксепшена
+        exit(messagebox.showerror('ERROR', 'Config file not found'))
 
-config = yaml.full_load(conffile)
-conffile.close()
+    config = yaml.full_load(conffile)
+    conffile.close()
+    return config
+
 
 # Вводим основные переменные
-vers = config['core']['version']
-langcode = config['settings']['locale']
+vers = getconfig()['core']['version']
+langcode = getconfig()['settings']['locale']
 # Локализация
 gettext.translation('CarMusicSorter', localedir='l10n',
                     languages=[langcode]).install()
@@ -193,7 +198,7 @@ gettext.translation('CarMusicSorter', localedir='l10n',
 window = Tk()
 
 window.iconphoto(True, PhotoImage(file = 'data/imgs/main.png'))
-window.geometry('650x300')
+window.geometry('650x260')
 window.eval('tk::PlaceWindow . center')
 window.title('Car Music Sorter')
 
@@ -210,12 +215,33 @@ menu_file = Menu(menu, tearoff = 0)
 menu.add_cascade(label = _('File'), menu = menu_file)
 menu.add_cascade(label = _('Info'), menu = menu_about)
 # Элементы меню
-menu_about.add_command(label = _('About'), command = lambda: popup_about(vers))
+menu_about.add_command(label = _('About'),
+                       command = lambda: popup_about(vers),
+                       accelerator = 'F1')
 
 menu_file.add_command(label = _('Input Dir'),
-                      command = lambda: workdirs('indir'))
+                      command = lambda: workdirs('indir'),
+                      accelerator = 'CTRL+O')
 menu_file.add_command(label = _('Output Dir'),
-                      command = lambda: workdirs('outdirs'))
+                      command = lambda: workdirs('outdirs'),
+                      accelerator = 'CTRL+D')
+menu_file.add_command(label = _('Clear'),
+                      command = lambda: workdirs('clear'),
+                      accelerator = 'CTRL+R')
+menu_file.add_separator()
+menu_file.add_command(label = _('Settings'),
+                      command = w_settings.popup_settings)
+menu_file.add_separator()
+menu_file.add_command(label = _('Exit'),
+                      command = exit,
+                      accelerator = 'CTRL+E')
+
+menu_file.bind_all('<Command-o>', lambda event: workdirs('indir'))
+menu_file.bind_all('<Command-d>', lambda event: workdirs('outdir'))
+menu_file.bind_all('<Command-r>', lambda event: workdirs('clear'))
+menu_file.bind_all('<Command-e>', exit)
+
+menu_about.bind_all('<F1>', lambda event: popup_about(vers))
 
 window.config(menu = menu)
 # Строим элеметны основного окна и группы
@@ -272,5 +298,4 @@ clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 progress_log = Text(progress_group, state = 'disabled', relief = 'flat',
                     width = 31, height = 10)
 progress_log.grid(ipadx = 2, ipady = 2, padx = 4, column = 0, row = 0)
-
 window.mainloop()
