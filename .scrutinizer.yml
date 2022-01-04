@@ -11,15 +11,15 @@ build:
             tests:
               before:
                 - pip install pytest coverage
-                  override:
-                      - py-scrutinizer-run
-                      -
-                          command: pylint-run
-                          use_website_config: true
-                      -
-                          command: coverage run -m pytest
-                          coverage:
-                            file: .coverage
+                override:
+                    - py-scrutinizer-run
+                    -
+                        command: pylint-run
+                        use_website_config: true
+                    -
+                        command: coverage run -m pytest
+                        coverage:
+                          file: .coverage
 filter:
     excluded_paths:
         - '*/test/*'
