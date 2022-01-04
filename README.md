@@ -1,5 +1,8 @@
 # <img src="https://i.imgur.com/dSzqaaP.png"  width=50 alt="Car Music Sorter Icon"> Car Music Sorter
 
+[![Build Status](https://scrutinizer-ci.com/g/intervisionlord/CarMusicSorter/badges/build.png?b=master)](https://scrutinizer-ci.com/g/intervisionlord/CarMusicSorter/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/intervisionlord/CarMusicSorter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/intervisionlord/CarMusicSorter/?branch=master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/intervisionlord/CarMusicSorter/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Утилита для извлечения треков из субдиректорий исполнителя (альбомов) и сохранении их в единой директории с названием исполнителя для последующей загрузки на флешку для автомагнитолы.
