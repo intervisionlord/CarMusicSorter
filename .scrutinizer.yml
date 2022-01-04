@@ -16,7 +16,10 @@ build:
                       -
                           command: pylint-run
                           use_website_config: true
-                      - coverage run -m pytest
+                      -
+                          command: coverage run -m pytest
+                          coverage:
+                            file: .coverage
 filter:
     excluded_paths:
         - '*/test/*'
