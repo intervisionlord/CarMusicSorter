@@ -3,3 +3,6 @@
 
 schedule: ''
 update: false
+pin: True
+schedule: "every week"
+branch: master

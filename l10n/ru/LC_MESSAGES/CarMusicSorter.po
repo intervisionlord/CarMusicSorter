@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2021-12-29 12:12+0300\n"
-"PO-Revision-Date: 2021-12-29 12:15+0300\n"
+"POT-Creation-Date: 2022-01-04 21:21+0300\n"
+"PO-Revision-Date: 2022-01-04 21:21+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: ru_RU\n"
@@ -36,11 +36,11 @@ msgstr "Указать конечную директорию"
 msgid "Output DIR set to: "
 msgstr "Конечная директория: "
 
-#: CMS.py:44 CMS.py:263
+#: CMS.py:44 CMS.py:267
 msgid "Input DIR not defined"
 msgstr "Исходная директория не указана"
 
-#: CMS.py:45 CMS.py:264
+#: CMS.py:45 CMS.py:268
 msgid "Output DIR not defined"
 msgstr "Конечная директория не указана"
 
@@ -48,7 +48,7 @@ msgstr "Конечная директория не указана"
 msgid "Paths cleared"
 msgstr "Пути очищены"
 
-#: CMS.py:75 CMS.py:214
+#: CMS.py:75 CMS.py:218
 msgid "About"
 msgstr "О программе"
 
@@ -84,53 +84,69 @@ msgstr "Исходная и конечные директории должны �
 msgid "Completed!"
 msgstr "Выполнено!"
 
-#: CMS.py:211
+#: CMS.py:215
 msgid "File"
 msgstr "Файл"
 
-#: CMS.py:212
+#: CMS.py:216
 msgid "Info"
 msgstr "Справка"
 
-#: CMS.py:218 CMS.py:272
+#: CMS.py:222 CMS.py:276
 msgid "Input Dir"
 msgstr "Исходная директория"
 
-#: CMS.py:221 CMS.py:277
+#: CMS.py:225 CMS.py:281
 msgid "Output Dir"
 msgstr "Конечная директория"
 
-#: CMS.py:224 CMS.py:287
+#: CMS.py:228 CMS.py:291
 msgid "Clear"
 msgstr "Очистить"
 
-#: CMS.py:228 w_settings.py:30 w_settings.py:31
+#: CMS.py:232 w_settings.py:39 w_settings.py:40
 msgid "Settings"
 msgstr "Настройки"
 
-#: CMS.py:231
+#: CMS.py:235
 msgid "Exit"
 msgstr "Выход"
 
-#: CMS.py:244
+#: CMS.py:248
 msgid "IO Directories"
 msgstr "Начальная / Конечная директории"
 
-#: CMS.py:249
+#: CMS.py:253
 msgid "Operations"
 msgstr "Операции"
 
-#: CMS.py:253
+#: CMS.py:257
 msgid "Progress"
 msgstr "Прогресс"
 
-#: CMS.py:282
+#: CMS.py:286
 msgid "Process"
 msgstr "Начать"
 
-#: w_settings.py:37
+#: w_settings.py:25
+msgid "Information"
+msgstr "Информация"
+
+#: w_settings.py:26
+msgid "Settings will be applied after programm restart."
+msgstr "Настройки вступят в силу после перезапуска программы."
+
+#: w_settings.py:44
+msgid "Localisation"
+msgstr "Локализация"
+
+#: w_settings.py:51
 msgid "Apply"
 msgstr "Применить"
+
+#, python-brace-format
+#~ msgid "New language is: {lang}.\n"
+#~ msgstr "Новая локализация: {lang}.\n"
 
 #~ msgid "Language"
 #~ msgstr "Язык"
