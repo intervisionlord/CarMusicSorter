@@ -9,7 +9,7 @@ build:
                 override:
                     - 'true'
                 before:
-                    - pip install coverage pytest pyyaml python-gettext regex shutil
+                    - pip install coverage pytest pyyaml python-gettext regex
             tests:
                 override:
                     - py-scrutinizer-run
