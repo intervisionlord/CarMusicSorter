@@ -9,7 +9,7 @@ build:
                 override:
                     - 'true'
                 before:
-                    - pip install coverage pytest pyyaml gettext re shutil
+                    - pip install coverage pytest pyyaml python-gettext re shutil
             tests:
                 override:
                     - py-scrutinizer-run
