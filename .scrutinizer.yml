@@ -10,6 +10,9 @@ filter:
 build:
   nodes:
     coverage:
+      project_setup:
+        override:
+          - pip install coverage
       tests:
         override:
           - command: 'coverage run -m pytest'
