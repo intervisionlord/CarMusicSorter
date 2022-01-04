@@ -1,6 +1,6 @@
 """Отрисовка окна настроек."""
 import os
-from tkinter import Toplevel, LabelFrame, PhotoImage
+from tkinter import Toplevel, LabelFrame, PhotoImage, Label
 from tkinter.ttk import Combobox, Button
 
 POPUP_WIDTH: int = 400
@@ -9,7 +9,7 @@ POPUP_HEIGHT: int = 200
 
 def check_langs():
     """Проверяет какие локализации доступны."""
-    langs = os.listdir('l10n')
+    langs: list = os.listdir('l10n')
     return langs
 
 

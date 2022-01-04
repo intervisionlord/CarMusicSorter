@@ -176,17 +176,21 @@ def maincopy(files, output_dir):
 
 
 # Проверяем конфиг
-try:
-    conffile = open('conf/main.yml', 'r')
-except IOError:  # FIXME: Убрать exit() в результате эксепшена
-    exit(messagebox.showerror('ERROR', 'Config file not found'))
+def getconfig():
+    """Определяет наличие конфига и загружает его."""
+    try:
+        conffile = open('conf/main.yml', 'r')
+    except IOError:  # FIXME: Убрать exit() в результате эксепшена
+        exit(messagebox.showerror('ERROR', 'Config file not found'))
 
-config = yaml.full_load(conffile)
-conffile.close()
+    config = yaml.full_load(conffile)
+    conffile.close()
+    return config
+
 
 # Вводим основные переменные
-vers = config['core']['version']
-langcode = config['settings']['locale']
+vers = getconfig()['core']['version']
+langcode = getconfig()['settings']['locale']
 # Локализация
 gettext.translation('CarMusicSorter', localedir='l10n',
                     languages=[langcode]).install()
