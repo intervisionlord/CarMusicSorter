@@ -1,0 +1,4 @@
+update: all
+pin: True
+schedule: "every week"
+branch: master
