@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: carmusicsorter\n"
-"POT-Creation-Date: 2021-12-21 12:29+0300\n"
-"PO-Revision-Date: 2021-12-28 17:48\n"
+"POT-Creation-Date: 2021-12-29 12:12+0300\n"
+"PO-Revision-Date: 2022-01-04 17:11\n"
 "Last-Translator: Intervision\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -20,110 +20,123 @@ msgstr ""
 "X-Crowdin-File: /master/l10n/ru/LC_MESSAGES/CarMusicSorter.po\n"
 "X-Crowdin-File-ID: 13\n"
 
-#: CMS.py:24
+#: CMS.py:29
 msgid "Open source directory"
 msgstr ""
 
-#: CMS.py:27
+#: CMS.py:32
 msgid "Input DIR set to: "
 msgstr ""
 
-#: CMS.py:32
+#: CMS.py:37
 msgid "Set destination directory"
 msgstr ""
 
-#: CMS.py:35
+#: CMS.py:40
 msgid "Output DIR set to: "
 msgstr ""
 
-#: CMS.py:39 CMS.py:218
+#: CMS.py:44 CMS.py:263
 msgid "Input DIR not defined"
 msgstr ""
 
-#: CMS.py:40 CMS.py:219
+#: CMS.py:45 CMS.py:264
 msgid "Output DIR not defined"
 msgstr ""
 
-#: CMS.py:41
+#: CMS.py:46
 msgid "Paths cleared"
 msgstr ""
 
-#: CMS.py:68 CMS.py:192
+#: CMS.py:75 CMS.py:214
 msgid "About"
 msgstr ""
 
-#: CMS.py:75
+#: CMS.py:81
 msgid "Version: "
 msgstr ""
 
-#: CMS.py:75
+#: CMS.py:83
 msgid "\n"
 "Author: "
 msgstr ""
 
-#: CMS.py:78
+#: CMS.py:89
 msgid "Icons: "
 msgstr ""
 
-#: CMS.py:78
+#: CMS.py:89
 msgid "on"
 msgstr ""
 
-#: CMS.py:91
+#: CMS.py:102
 msgid "Input DIR or Output DIR are not defined!"
 msgstr ""
 
-#: CMS.py:93
+#: CMS.py:104
 msgid "Input DIR and Output DIR must be different!"
 msgstr ""
 
-#: CMS.py:142
+#: CMS.py:162
 msgid "Completed!"
 msgstr ""
 
-#: CMS.py:189
+#: CMS.py:211
 msgid "File"
 msgstr ""
 
-#: CMS.py:190
+#: CMS.py:212
 msgid "Info"
 msgstr ""
 
-#: CMS.py:194
+#: CMS.py:218 CMS.py:272
 msgid "Input Dir"
 msgstr ""
 
-#: CMS.py:195
+#: CMS.py:221 CMS.py:277
 msgid "Output Dir"
 msgstr ""
 
-#: CMS.py:199
+#: CMS.py:224 CMS.py:287
+msgid "Clear"
+msgstr ""
+
+#: CMS.py:228 w_settings.py:30 w_settings.py:31
+msgid "Settings"
+msgstr ""
+
+#: CMS.py:231
+msgid "Exit"
+msgstr ""
+
+#: CMS.py:244
 msgid "IO Directories"
 msgstr ""
 
-#: CMS.py:204
+#: CMS.py:249
 msgid "Operations"
 msgstr ""
 
-#: CMS.py:208
+#: CMS.py:253
 msgid "Progress"
 msgstr ""
 
-#: CMS.py:227
-msgid "Choose input DIR"
-msgstr ""
-
-#: CMS.py:232
-msgid "Choose output DIR"
-msgstr ""
-
-#: CMS.py:237
+#: CMS.py:282
 msgid "Process"
 msgstr ""
 
-#: CMS.py:242
-msgid "Clear"
+#: w_settings.py:37
+msgid "Apply"
 msgstr ""
+
+#~ msgid "Language"
+#~ msgstr "Язык"
+
+#~ msgid "Choose input DIR"
+#~ msgstr "Исходная директория"
+
+#~ msgid "Choose output DIR"
+#~ msgstr "Конечная директория"
 
 #~ msgid "Hide Fonts"
 #~ msgstr "Скрыть шрифты"
