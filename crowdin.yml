@@ -1,3 +1,0 @@
-files:
-  - source: l10n/ru/LC_MESSAGES/*.po
-    translation: l10n/%two_letters_code%/LC_MESSAGES/%original_file_name%
