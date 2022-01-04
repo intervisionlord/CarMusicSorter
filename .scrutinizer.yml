@@ -18,7 +18,7 @@ build:
                         command: coverage run -m pytest
                         coverage:
                           file: .coverage
-                          format: python-cc
+                          format: py-cc
 filter:
     excluded_paths:
         - '*/test/*'
