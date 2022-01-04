@@ -7,7 +7,7 @@ python:
 
 install:
   - sudo apt-get install -y python3-tk
-  - pip install codecov pytest regex pyyaml
+  - pip install coverage pytest regex pyyaml
 
 script:
-  - codecov run -m pytest
+  - coverage run -m pytest
