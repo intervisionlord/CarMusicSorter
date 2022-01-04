@@ -5,6 +5,10 @@
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/intervisionlord/CarMusicSorter/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
+![GitHub contributors](https://img.shields.io/github/contributors/intervisionlord/CarMusicSorter)
+![GitHub last commit](https://img.shields.io/github/last-commit/intervisionlord/CarMusicSorter)
+![Lines of code](https://img.shields.io/tokei/lines/github/intervisionlord/CarMusicSorter)
+
 Утилита для извлечения треков из субдиректорий исполнителя (альбомов) и сохранении их в единой директории с названием исполнителя для последующей загрузки на флешку для автомагнитолы.
 
 ---
