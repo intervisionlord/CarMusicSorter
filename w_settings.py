@@ -23,9 +23,7 @@ def apply(lang, popup):
     with open(r'conf/main.yml', 'w') as file:
         yaml.dump(config, file)
     messagebox.showinfo(_('Information'),
-                        _(f'New language is: {lang}.\n'
-                          f'New settings will be applied'
-                          f'after programm restart.'))
+                        _('Settings will be applied after programm restart.'))
     popup.destroy()
 
 

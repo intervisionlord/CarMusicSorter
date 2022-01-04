@@ -37,7 +37,7 @@
 В релиз входят обе версии (а также bash версия, в виде которой инструмент существовал ранее (просто так))
 
 #### Скачать последнюю версию
-###### [0.4.5a - (WIN) CarMusicSorter](https://github.com/intervisionlord/CarMusicSorter/releases/tag/0.4.5a)
+###### [CarMusicSorter (latest)](https://github.com/intervisionlord/CarMusicSorter/releases/latest)
 
 <a name="usage"></a>
 ### 2. Использование
