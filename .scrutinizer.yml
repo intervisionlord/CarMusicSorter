@@ -9,17 +9,16 @@ build:
                 override:
                     - 'true'
             tests:
+              before:
+                - pip install pytest coverage
                 override:
                     - py-scrutinizer-run
                     -
                         command: pylint-run
                         use_website_config: true
-                  coverage:
-                    file: .coverage
-                    format: python-cc
+                    - coverage run -m pytest
 filter:
     excluded_paths:
         - '*/test/*'
-        - '*/tests/*'
     dependency_paths:
         - 'lib/*'
