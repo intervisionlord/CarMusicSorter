@@ -198,7 +198,7 @@ gettext.translation('CarMusicSorter', localedir='l10n',
 window = Tk()
 
 window.iconphoto(True, PhotoImage(file = 'data/imgs/main.png'))
-window.geometry('650x300')
+window.geometry('650x260')
 window.eval('tk::PlaceWindow . center')
 window.title('Car Music Sorter')
 
