@@ -9,5 +9,8 @@ install:
   - sudo apt-get install -y python3-tk
   - pip install coverage pytest regex pyyaml
 
+services:
+  - xvfb
+
 script:
   - coverage run -m pytest
