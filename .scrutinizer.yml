@@ -9,7 +9,7 @@ build:
                 override:
                     - 'true'
                 before:
-                    - pip install coverage pytest
+                    - pip install coverage pytest yaml gettext re shutil
             tests:
                 override:
                     - py-scrutinizer-run
