@@ -298,4 +298,6 @@ clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 progress_log = Text(progress_group, state = 'disabled', relief = 'flat',
                     width = 31, height = 10)
 progress_log.grid(ipadx = 2, ipady = 2, padx = 4, column = 0, row = 0)
-window.mainloop()
+
+if __name__ == '__main__':
+    window.mainloop()
