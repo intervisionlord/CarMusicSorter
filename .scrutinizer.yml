@@ -8,18 +8,22 @@ build:
             project_setup:
                 override:
                     - 'true'
-            tests:
-              before:
-                - pip install pytest coverage
+            test_default:
                 override:
                     - py-scrutinizer-run
                     -
                         command: pylint-run
                         use_website_config: true
-                    -
-                        command: coverage run -m pytest
-                        coverage:
-                          file: .coverage
+            test_personal:
+                before:
+                  - pip install coverage
+                  - pip install pytest
+                override:
+                  -
+                      command: coverage run -m pytest
+                      coverage:
+                        file: .coverage
+                        format: python-cc
 filter:
     excluded_paths:
         - '*/test/*'
