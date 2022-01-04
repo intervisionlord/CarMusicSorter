@@ -2,21 +2,22 @@ checks:
     python:
         code_rating: true
         duplicate_code: true
-
+build:
+    nodes:
+        analysis:
+            project_setup:
+                override:
+                    - 'true'
+            tests:
+                before:
+                    - pip install coverage pytest
+                override:
+                    - py-scrutinizer-run
+                    - coverage run -m pytest
+                        command: pylint-run
+                        use_website_config: true
 filter:
     excluded_paths:
-        - tests/*
-
-build:
-  nodes:
-    analysis:
-      tests:
-        project_setup:
-          override:
-            - pip install coverage pytest re yaml tkinter shutil gettext
-        override:
-          - py-scrutinizer-run
-          - command: 'coverage run -m pytest'
-            coverage:
-              file: '.coverage'
-              format: 'py-cc'
+        - '*/test/*'
+    dependency_paths:
+        - 'lib/*'
