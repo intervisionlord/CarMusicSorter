@@ -13,6 +13,7 @@ build:
       project_setup:
         override:
           - pip install coverage
+          - pip install pytest
       tests:
         override:
           - command: 'coverage run -m pytest'
