@@ -1,16 +1,13 @@
 """CLI Версия CMS."""
 import os
-from pathlib import Path
 
-vers = '0.3.3с'
+vers = '0.3.4'
 
 
 def ask_paths():
     """Запуск и в интерактивном режиме."""
-    print('Путь до исходной директории')
-    input_dir = input()
-    print('Путь до конечной директории')
-    output_dir = input()
+    input_dir = input('Путь до исходной директории: ')
+    output_dir = input('Путь до конечной директории: ')
     return input_dir, output_dir
 
 
@@ -26,43 +23,47 @@ def start_interactive():
         print('Начальная и конечная директории не должны совпадать')
         return
     else:
-        main_process()
+        main_process(input_dir, output_dir)
 
 
-def main_process():
-    """Основной процесс программы."""
+def main_process(input_dir, output_dir):
+    """Принимает начальную и конечную директории, запускает копирование.
+
+    Параметры
+    ----------
+    input_dir : string
+        Путь начальной директории в виде строки.
+    output_dir : string
+        Путь конечной директории в виде строки.
+
+    Не возвращает результатов.
+    -------
+    """
     pass
 
 
-if input_dir == '' or output_dir == '':
-    print('Не указана начальная или конечная директория')
-    exit()
-elif input_dir == output_dir:
-    print('Начальная и конечная директории не должны совпадать')
-    exit()
-try:
-    input_dir
-except Exception:
-    pass
-else:
-    for path, subdirs, files in os.walk(input_dir):
-        for file in files:
-            # Перегоняем все MP3 в целевую директорию,
-            # потом разберемся что с ними делать
-            # Хотя, лучше искать только нужные (отбрасывать лайвы и ремиксы
-            # и перегонять уже без них)
-            filtered = re.search('.*mp3', file)
-            if filtered is not None:
-                print(f'{path}/{filtered.group(0)}')
-                shutil.copyfile(f'{path}/{filtered.group(0)}',
-                                f'{output_dir}/{filtered.group(0)}')
+start_interactive()
+exit()
+
+for path, subdirs, files in os.walk(input_dir):
+    for file in files:
+        # Перегоняем все MP3 в целевую директорию,
+        # потом разберемся что с ними делать
+        # Хотя, лучше искать только нужные (отбрасывать лайвы и ремиксы
+        # и перегонять уже без них)
+        filtered = re.search('.*mp3', file)
+        if filtered is not None:
+            print(f'{path}/{filtered.group(0)}')
+            shutil.copyfile(f'{path}/{filtered.group(0)}',
+                            f'{output_dir}/{filtered.group(0)}')
 
 source_file = []
 # 3.1. Удаление ремиксов и лайвов
+regex = r'.*\(.*[Rr]emix.*\).*|.*\(.*[Ll]ive.*\).*'
 for files in os.walk(output_dir):
     for file in files[2]:
         try:
-            source_file.append(re.search(r'.*\(.*[Rr]emix.*\).*|.*\(.*[Ll]ive.*\).*', file).group(0))
+            source_file.append(re.search(regex, file).group(0))
         except Exception:
             pass
 for file in source_file:

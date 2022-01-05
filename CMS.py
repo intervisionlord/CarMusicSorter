@@ -181,7 +181,7 @@ def getconfig():
     try:
         conffile = open('conf/main.yml', 'r')
     except IOError:  # FIXME: Убрать exit() в результате эксепшена
-        exit(messagebox.showerror('ERROR', 'Config file not found'))
+        exit(messagebox.showerror('ERROR', _('Config file not found')))
 
     config = yaml.full_load(conffile)
     conffile.close()

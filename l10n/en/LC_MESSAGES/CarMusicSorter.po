@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2022-01-04 21:22+0300\n"
-"PO-Revision-Date: 2022-01-04 21:22+0300\n"
+"POT-Creation-Date: 2022-01-05 16:24+0300\n"
+"PO-Revision-Date: 2022-01-05 16:24+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: en\n"
@@ -79,6 +79,10 @@ msgstr ""
 
 #: CMS.py:162
 msgid "Completed!"
+msgstr ""
+
+#: CMS.py:184
+msgid "Config file not found"
 msgstr ""
 
 #: CMS.py:215
