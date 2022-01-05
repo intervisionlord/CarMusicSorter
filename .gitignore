@@ -131,13 +131,14 @@ venv.bak/
 # pytype static type analyzer
 .pytype/
 
-# Cython debug symbols
-cython_debug/
-
 ################## CUSTOM ##################
 
-# Файлы и директории тестировнаия
-test*
+# Файлы и директории тестирования
+test-0
+test-1
 
 # Упаковщик
 Build.py
+
+# Покрытие
+.coveralls.yml
