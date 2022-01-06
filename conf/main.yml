@@ -1,5 +1,5 @@
 core:
-  version: 0.5.7.1
+  version: 0.5.7.2
 settings:
   locale: ru
   logging: true

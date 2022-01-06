@@ -1,7 +1,7 @@
 """Тестирование функционала настроек."""
 import os
 from pathlib import Path
-from w_settings import check_langs
+from w_settings import check_langs, current_lang
 
 
 def test_getconfig_locales_count():
@@ -14,3 +14,8 @@ def test_getconfig_locales_count():
     assert nominal_count == len(check_langs()), ('Folders with'
                                                  'localisations does not equal'
                                                  'localisations list')
+
+
+def test_current_lang():
+    """Тестирует невыход за значения."""
+    assert current_lang() <= len(check_langs())
