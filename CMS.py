@@ -1,5 +1,4 @@
 """Car Music Sorter."""
-import yaml
 import gettext
 import os
 import re
@@ -11,6 +10,8 @@ from tkinter import Tk, PhotoImage, Menu, LabelFrame
 from tkinter import Text, Toplevel, messagebox
 from tkinter.ttk import Button, Label, Progressbar
 from pathlib import Path
+from f_getconfig import getconfig
+from f_logging import writelog
 
 import tkinter.filedialog as fd
 input_dir = ''
@@ -132,6 +133,7 @@ def processing():
                 pass
     for file in source_file:
         printlog('Removing Remix: ' + file)
+        writelog(_('Removing Remix: ') + file)
         os.remove(f'{output_dir}/{file}')
         main_progressbar['value'] = main_progressbar['value'] + 1
         window.update_idletasks()
@@ -160,32 +162,22 @@ def polish_filenames():
         window.update_idletasks()
     source_file.clear()
     printlog(_('Completed!'))
+    writelog(_('Completed!'))
 
 
 # Копируем файлы
 def maincopy(files, output_dir):
     """Копирует файлы."""
     printlog(f'{files}')
+    writelog(f'{files}')
     filename = str.split(files, '/')
     printlog(filename[-1])
+    writelog(filename[-1])
     shutil.copyfile(f'{files}', f'{output_dir}/{filename[-1]}')
     main_progressbar['value'] = main_progressbar['value'] + 1
     window.update_idletasks()
 # TODO: Вывести запись логов в файл, убрать бокс с логом из окна.
 # END FUNCTIONS #
-
-
-# Проверяем конфиг
-def getconfig():
-    """Определяет наличие конфига и загружает его."""
-    try:
-        conffile = open('conf/main.yml', 'r')
-    except IOError:  # FIXME: Убрать exit() в результате эксепшена
-        exit(messagebox.showerror('ERROR', _('Config file not found')))
-
-    config = yaml.full_load(conffile)
-    conffile.close()
-    return config
 
 
 # Вводим основные переменные

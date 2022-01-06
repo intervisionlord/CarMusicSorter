@@ -3,6 +3,7 @@ import os
 import yaml
 from tkinter import Toplevel, LabelFrame, PhotoImage, Label, messagebox
 from tkinter.ttk import Combobox, Button
+from f_getconfig import getconfig
 
 POPUP_WIDTH: int = 180
 POPUP_HEIGHT: int = 90
@@ -27,6 +28,11 @@ def apply(lang, popup):
     popup.destroy()
 
 
+def current_lang():
+    """Определяет индекс текущего языка для выпадающего списка."""
+    return check_langs().index(getconfig()['settings']['locale'])
+
+
 def popup_settings():
     """Открывает окно 'Настройки'."""
     popup = Toplevel()
@@ -46,6 +52,7 @@ def popup_settings():
 
     lang_vars = Combobox(frame_settings, state = 'readonly',
                          values = check_langs(), width = 4)
+    lang_vars.current(current_lang())
     lang_vars.grid(column = 1, row = 0)
 
     apply_button = Button(popup, text = _('Apply'),
@@ -57,3 +64,7 @@ def popup_settings():
     popup.grab_set()
     popup.focus_set()
     popup.wait_window()
+
+
+if __name__ == '__main__':
+    print(current_lang())
