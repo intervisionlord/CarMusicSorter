@@ -7,7 +7,7 @@ import w_settings
 
 from sys import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame
-from tkinter import Text, Toplevel, messagebox
+from tkinter import Text, Toplevel
 from tkinter.ttk import Button, Label, Progressbar
 from pathlib import Path
 from f_getconfig import getconfig
