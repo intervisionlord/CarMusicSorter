@@ -16,7 +16,6 @@ from f_logging import writelog
 import tkinter.filedialog as fd
 input_dir = ''
 output_dir = ''
-
 source_file = []
 
 
@@ -107,11 +106,9 @@ def check_paths():
     else:
         for path, subdirs, files in os.walk(input_dir):
             for file in files:
-                # Перегоняем все MP3 в целевую директорию,
-                # потом разберемся что с ними делать
-                # Хотя, лучше искать только нужные (отбрасывать лайвы
-                # и ремиксы и перегонять уже без них)
-                filtered = re.search('.*mp3', file)
+                # Перегоняем MP3 без лайвов и ремиксов в целевую директорию.
+                filtered = re.search(r'^(?!(.*[Rr]emix.*|.*[Ll]ive.*)).*mp3',
+                                     file)
                 if filtered is not None:
                     source_file.append(f'{path}/{filtered.group(0)}')
     main_progressbar['maximum'] = len(source_file)
@@ -124,6 +121,7 @@ def processing():
     """Удаляет ремиксы и лайвы."""
     check_paths()
 # Удаление ремиксов и лайвов
+# TODO: Depricated
     liveregexp = r'.*\(.*[Rr]emix.*\).*|.*\(.*[Ll]ive.*\).*'
     for files in os.walk(output_dir):
         for file in files[2]:
@@ -188,7 +186,6 @@ gettext.translation('CarMusicSorter', localedir='l10n',
                     languages=[langcode]).install()
 # Рисуем окно
 window = Tk()
-
 window.iconphoto(True, PhotoImage(file = 'data/imgs/main.png'))
 window.geometry('650x260')
 window.eval('tk::PlaceWindow . center')
@@ -206,6 +203,7 @@ menu_about = Menu(menu, tearoff = 0)
 menu_file = Menu(menu, tearoff = 0)
 menu.add_cascade(label = _('File'), menu = menu_file)
 menu.add_cascade(label = _('Info'), menu = menu_about)
+
 # Элементы меню
 menu_about.add_command(label = _('About'),
                        command = lambda: popup_about(vers),
@@ -228,6 +226,7 @@ menu_file.add_command(label = _('Exit'),
                       command = exit,
                       accelerator = 'CTRL+E')
 
+# Биндим хоткеи к функциям
 menu_file.bind_all('<Command-o>', lambda event: workdirs('indir'))
 menu_file.bind_all('<Command-d>', lambda event: workdirs('outdir'))
 menu_file.bind_all('<Command-r>', lambda event: workdirs('clear'))
@@ -287,6 +286,7 @@ clear_button = Button(operation_group, text = _('Clear'),
 clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
 
 # Лог и прогресс
+# TODO: Depricated
 progress_log = Text(progress_group, state = 'disabled', relief = 'flat',
                     width = 31, height = 10)
 progress_log.grid(ipadx = 2, ipady = 2, padx = 4, column = 0, row = 0)
