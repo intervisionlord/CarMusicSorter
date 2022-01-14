@@ -161,7 +161,6 @@ def maincopy(files, output_dir):
     shutil.copyfile(f'{files}', f'{output_dir}/{filename[-1]}')
     main_progressbar['value'] = main_progressbar['value'] + 1
     window.update_idletasks()
-# TODO: Вывести запись логов в файл, убрать бокс с логом из окна.
 # END FUNCTIONS #
 
 
@@ -196,7 +195,6 @@ menu.add_cascade(label = _('Info'), menu = menu_about)
 menu_about.add_command(label = _('About'),
                        command = lambda: popup_about(vers),
                        accelerator = 'F1')
-
 menu_file.add_command(label = _('Input Dir'),
                       command = lambda: workdirs('indir'),
                       accelerator = 'CTRL+O')
@@ -221,8 +219,8 @@ menu_file.bind_all('<Command-r>', lambda event: workdirs('clear'))
 menu_file.bind_all('<Command-e>', exit)
 
 menu_about.bind_all('<F1>', lambda event: popup_about(vers))
-
 window.config(menu = menu)
+
 # Строим элеметны основного окна и группы
 first_group = LabelFrame(window, text = _('IO Directories'))
 
@@ -245,7 +243,6 @@ main_progressbar.grid(pady = 4, column = 0, row = 1)
 # Поясняющие лейблы
 source_label_text = _('Input DIR not defined')
 dest_label_text = _('Output DIR not defined')
-
 source_label = Label(first_group, text = source_label_text, justify = 'left')
 source_label.grid(column = 1, row = 0)
 dest_label = Label(first_group, text = dest_label_text, justify = 'left')
