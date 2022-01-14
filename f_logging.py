@@ -20,8 +20,10 @@ def check_logging_opt():
 def writelog(logmsg):
     """Пишет лог, если так указано в конфиге."""
     if os.path.isfile(opt_logname) is False:
-        with open(opt_logname, 'w') as log:
-            pass
-    if check_logging_opt() is True:
+        pass
+    elif check_logging_opt() is True:
         with open(opt_logname, 'a') as log:
             log.write(f'{logmsg}\n')
+    elif check_logging_opt() == 'ERR':
+        with open(opt_logname, 'a') as log:
+            log.write('Logging config error!')

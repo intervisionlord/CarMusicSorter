@@ -29,7 +29,7 @@ def workdirs(param):
         input_dir = fd.askdirectory(title = _('Open source directory'))
         if input_dir != '':
             source_label.config(text = f'...{path_short(input_dir, 2)}')
-            printlog(_('Input DIR set to: ') + input_dir)
+            writelog(_('Input DIR set to: ') + input_dir)
         else:
             input_dir = ''
     elif param == 'outdir':
@@ -37,23 +37,14 @@ def workdirs(param):
         output_dir = fd.askdirectory(title = _('Set destination directory'))
         if output_dir != '':
             dest_label.config(text = f'...{path_short(output_dir, 2)}')
-            printlog(_('Output DIR set to: ') + output_dir)
+            writelog(_('Output DIR set to: ') + output_dir)
         else:
             output_dir = ''
     elif param == 'clear':
         source_label.config(text = _('Input DIR not defined'))
         dest_label.config(text = _('Output DIR not defined'))
-        printlog(_('Paths cleared'))
         main_progressbar['value'] = 0
         input_dir = output_dir = ''
-
-
-def printlog(text):
-    """Пишет лог операции в TextBox."""
-    progress_log.config(state = 'normal')
-    progress_log.insert('end', f'{text}\n')
-    progress_log.config(state = 'disabled')
-    progress_log.see('end')
 
 
 def path_short(path_string, len):
@@ -99,9 +90,9 @@ def popup_about(vers):
 def check_paths():
     """Проверяет, что все пути заданы корректно и запускает копирование."""
     if input_dir == '' or output_dir == '':
-        printlog(_('Input DIR or Output DIR are not defined!'))
+        writelog(_('Input DIR or Output DIR are not defined!'))
     elif input_dir == output_dir:
-        printlog(_('Input DIR and Output DIR must be different!'))
+        writelog(_('Input DIR and Output DIR must be different!'))
         return
     else:
         for path, subdirs, files in os.walk(input_dir):
@@ -130,7 +121,6 @@ def processing():
             except Exception:
                 pass
     for file in source_file:
-        printlog('Removing Remix: ' + file)
         writelog(_('Removing Remix: ') + file)
         os.remove(f'{output_dir}/{file}')
         main_progressbar['value'] = main_progressbar['value'] + 1
@@ -159,17 +149,14 @@ def polish_filenames():
         main_progressbar['value'] = main_progressbar['value'] + 1
         window.update_idletasks()
     source_file.clear()
-    printlog(_('Completed!'))
     writelog(_('Completed!'))
 
 
 # Копируем файлы
 def maincopy(files, output_dir):
     """Копирует файлы."""
-    printlog(f'{files}')
     writelog(f'{files}')
     filename = str.split(files, '/')
-    printlog(filename[-1])
     writelog(filename[-1])
     shutil.copyfile(f'{files}', f'{output_dir}/{filename[-1]}')
     main_progressbar['value'] = main_progressbar['value'] + 1
@@ -285,12 +272,6 @@ clear_button = Button(operation_group, text = _('Clear'),
                       width = 20, compound = 'left')
 
 clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 0)
-
-# Лог и прогресс
-# TODO: Depricated
-# progress_log = Text(progress_group, state = 'disabled', relief = 'flat',
-#                     width = 31, height = 10)
-# progress_log.grid(ipadx = 2, ipady = 2, padx = 4, column = 0, row = 0)
 
 if __name__ == '__main__':
     window.mainloop()

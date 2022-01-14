@@ -27,7 +27,6 @@ def apply(lang, popup, log_var):
         yaml.dump(config, file)
     messagebox.showinfo(_('Information'),
                         _('Settings will be applied after programm restart.'))
-    print(log_var)
     popup.destroy()
 
 
