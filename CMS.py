@@ -170,6 +170,7 @@ langcode = getconfig()['settings']['locale']
 # Локализация
 gettext.translation('CarMusicSorter', localedir='l10n',
                     languages=[langcode]).install()
+writelog('init')
 # Рисуем окно
 window = Tk()
 window.iconphoto(True, PhotoImage(file = 'data/imgs/main.png'))
