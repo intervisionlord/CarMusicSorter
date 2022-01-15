@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2022-01-05 16:24+0300\n"
-"PO-Revision-Date: 2022-01-05 16:24+0300\n"
+"POT-Creation-Date: 2022-01-15 01:40+0300\n"
+"PO-Revision-Date: 2022-01-15 01:41+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: ru_RU\n"
@@ -36,11 +36,11 @@ msgstr "Указать конечную директорию"
 msgid "Output DIR set to: "
 msgstr "Конечная директория: "
 
-#: CMS.py:44 CMS.py:267
+#: CMS.py:44 CMS.py:258
 msgid "Input DIR not defined"
 msgstr "Исходная директория не указана"
 
-#: CMS.py:45 CMS.py:268
+#: CMS.py:45 CMS.py:259
 msgid "Output DIR not defined"
 msgstr "Конечная директория не указана"
 
@@ -48,7 +48,7 @@ msgstr "Конечная директория не указана"
 msgid "Paths cleared"
 msgstr "Пути очищены"
 
-#: CMS.py:75 CMS.py:218
+#: CMS.py:75 CMS.py:208
 msgid "About"
 msgstr "О программе"
 
@@ -80,71 +80,79 @@ msgstr "Исходная или конечная директории не ук�
 msgid "Input DIR and Output DIR must be different!"
 msgstr "Исходная и конечные директории должны отличаться!"
 
-#: CMS.py:162
+#: CMS.py:134
+msgid "Removing Remix: "
+msgstr ""
+
+#: CMS.py:162 CMS.py:163
 msgid "Completed!"
 msgstr "Выполнено!"
 
-#: CMS.py:184
-msgid "Config file not found"
-msgstr "Файл конфигурации не найден"
-
-#: CMS.py:215
+#: CMS.py:204
 msgid "File"
 msgstr "Файл"
 
-#: CMS.py:216
+#: CMS.py:205
 msgid "Info"
 msgstr "Справка"
 
-#: CMS.py:222 CMS.py:276
+#: CMS.py:212 CMS.py:267
 msgid "Input Dir"
 msgstr "Исходная директория"
 
-#: CMS.py:225 CMS.py:281
+#: CMS.py:215 CMS.py:272
 msgid "Output Dir"
 msgstr "Конечная директория"
 
-#: CMS.py:228 CMS.py:291
+#: CMS.py:218 CMS.py:282
 msgid "Clear"
 msgstr "Очистить"
 
-#: CMS.py:232 w_settings.py:39 w_settings.py:40
+#: CMS.py:222 w_settings.py:49 w_settings.py:50
 msgid "Settings"
 msgstr "Настройки"
 
-#: CMS.py:235
+#: CMS.py:225
 msgid "Exit"
 msgstr "Выход"
 
-#: CMS.py:248
+#: CMS.py:239
 msgid "IO Directories"
 msgstr "Начальная / Конечная директории"
 
-#: CMS.py:253
+#: CMS.py:244
 msgid "Operations"
 msgstr "Операции"
 
-#: CMS.py:257
+#: CMS.py:248
 msgid "Progress"
 msgstr "Прогресс"
 
-#: CMS.py:286
+#: CMS.py:277
 msgid "Process"
 msgstr "Начать"
 
-#: w_settings.py:25
+#: f_getconfig.py:10
+msgid "Config file not found"
+msgstr "Файл конфигурации не найден"
+
+#: w_settings.py:28
 msgid "Information"
 msgstr "Информация"
 
-#: w_settings.py:26
+#: w_settings.py:29
 msgid "Settings will be applied after programm restart."
 msgstr "Настройки вступят в силу после перезапуска программы."
 
-#: w_settings.py:44
+#: w_settings.py:54
 msgid "Localisation"
 msgstr "Локализация"
 
-#: w_settings.py:51
+#: w_settings.py:57
+msgid "Logging"
+msgstr "Логирование"
+
+#: w_settings.py:75
 msgid "Apply"
 msgstr "Применить"
 

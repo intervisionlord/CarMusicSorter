@@ -7,7 +7,7 @@ import w_settings
 
 from sys import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame
-from tkinter import Text, Toplevel
+from tkinter import Toplevel
 from tkinter.ttk import Button, Label, Progressbar
 from pathlib import Path
 from f_getconfig import getconfig
@@ -29,7 +29,7 @@ def workdirs(param):
         input_dir = fd.askdirectory(title = _('Open source directory'))
         if input_dir != '':
             source_label.config(text = f'...{path_short(input_dir, 2)}')
-            printlog(_('Input DIR set to: ') + input_dir)
+            writelog(_('Input DIR set to: ') + input_dir)
         else:
             input_dir = ''
     elif param == 'outdir':
@@ -37,23 +37,14 @@ def workdirs(param):
         output_dir = fd.askdirectory(title = _('Set destination directory'))
         if output_dir != '':
             dest_label.config(text = f'...{path_short(output_dir, 2)}')
-            printlog(_('Output DIR set to: ') + output_dir)
+            writelog(_('Output DIR set to: ') + output_dir)
         else:
             output_dir = ''
     elif param == 'clear':
         source_label.config(text = _('Input DIR not defined'))
         dest_label.config(text = _('Output DIR not defined'))
-        printlog(_('Paths cleared'))
         main_progressbar['value'] = 0
         input_dir = output_dir = ''
-
-
-def printlog(text):
-    """Пишет лог операции в TextBox."""
-    progress_log.config(state = 'normal')
-    progress_log.insert('end', f'{text}\n')
-    progress_log.config(state = 'disabled')
-    progress_log.see('end')
 
 
 def path_short(path_string, len):
@@ -99,9 +90,9 @@ def popup_about(vers):
 def check_paths():
     """Проверяет, что все пути заданы корректно и запускает копирование."""
     if input_dir == '' or output_dir == '':
-        printlog(_('Input DIR or Output DIR are not defined!'))
+        writelog(_('Input DIR or Output DIR are not defined!'))
     elif input_dir == output_dir:
-        printlog(_('Input DIR and Output DIR must be different!'))
+        writelog(_('Input DIR and Output DIR must be different!'))
         return
     else:
         for path, subdirs, files in os.walk(input_dir):
@@ -130,7 +121,6 @@ def processing():
             except Exception:
                 pass
     for file in source_file:
-        printlog('Removing Remix: ' + file)
         writelog(_('Removing Remix: ') + file)
         os.remove(f'{output_dir}/{file}')
         main_progressbar['value'] = main_progressbar['value'] + 1
@@ -159,22 +149,18 @@ def polish_filenames():
         main_progressbar['value'] = main_progressbar['value'] + 1
         window.update_idletasks()
     source_file.clear()
-    printlog(_('Completed!'))
     writelog(_('Completed!'))
 
 
 # Копируем файлы
 def maincopy(files, output_dir):
     """Копирует файлы."""
-    printlog(f'{files}')
     writelog(f'{files}')
     filename = str.split(files, '/')
-    printlog(filename[-1])
     writelog(filename[-1])
     shutil.copyfile(f'{files}', f'{output_dir}/{filename[-1]}')
     main_progressbar['value'] = main_progressbar['value'] + 1
     window.update_idletasks()
-# TODO: Вывести запись логов в файл, убрать бокс с логом из окна.
 # END FUNCTIONS #
 
 
@@ -184,12 +170,14 @@ langcode = getconfig()['settings']['locale']
 # Локализация
 gettext.translation('CarMusicSorter', localedir='l10n',
                     languages=[langcode]).install()
+writelog('init')
 # Рисуем окно
 window = Tk()
 window.iconphoto(True, PhotoImage(file = 'data/imgs/main.png'))
-window.geometry('650x260')
+window.geometry('370x270')
 window.eval('tk::PlaceWindow . center')
 window.title('Car Music Sorter')
+window.resizable(False, False)
 
 # Пути к оформлению
 sourceicon = PhotoImage(file = 'data/imgs/20source.png')
@@ -208,7 +196,6 @@ menu.add_cascade(label = _('Info'), menu = menu_about)
 menu_about.add_command(label = _('About'),
                        command = lambda: popup_about(vers),
                        accelerator = 'F1')
-
 menu_file.add_command(label = _('Input Dir'),
                       command = lambda: workdirs('indir'),
                       accelerator = 'CTRL+O')
@@ -233,8 +220,8 @@ menu_file.bind_all('<Command-r>', lambda event: workdirs('clear'))
 menu_file.bind_all('<Command-e>', exit)
 
 menu_about.bind_all('<F1>', lambda event: popup_about(vers))
-
 window.config(menu = menu)
+
 # Строим элеметны основного окна и группы
 first_group = LabelFrame(window, text = _('IO Directories'))
 
@@ -242,22 +229,21 @@ first_group.grid(sticky = 'WE', column = 0, row = 0, padx = 5, pady = 10,
                  ipadx = 2, ipady = 4)
 
 operation_group = LabelFrame(window, text = _('Operations'))
-operation_group.grid(sticky = 'WE', column = 0, row = 1, padx = 5, pady = 10,
-                     ipadx = 2, ipady = 4)
+operation_group.grid(sticky = 'WE', column = 0, row = 3, padx = 5, pady = 5,
+                     ipadx = 5, ipady = 5)
 
 progress_group = LabelFrame(window, text = _('Progress'))
-progress_group.grid(sticky = 'WSEN', column = 1, row = 0, padx = 5, pady = 10,
+progress_group.grid(sticky = 'WE', column = 0, row = 1, padx = 5, pady = 5,
                     ipadx = 0, ipady = 2, rowspan = 2)
 
 # Прогрессбар
-main_progressbar = Progressbar(progress_group, length = 255, value = 0,
+main_progressbar = Progressbar(progress_group, length = 350, value = 0,
                                orient = 'horizontal', mode = 'determinate')
 main_progressbar.grid(pady = 4, column = 0, row = 1)
 
 # Поясняющие лейблы
 source_label_text = _('Input DIR not defined')
 dest_label_text = _('Output DIR not defined')
-
 source_label = Label(first_group, text = source_label_text, justify = 'left')
 source_label.grid(column = 1, row = 0)
 dest_label = Label(first_group, text = dest_label_text, justify = 'left')
@@ -277,19 +263,13 @@ dest_button.grid(row = 1, ipadx = 2, ipady = 2, padx = 4)
 launch_button = Button(operation_group, text = _('Process'),
                        command = processing, image = launchicon,
                        width = 20, compound = 'left')
-launch_button.grid(column = 0, row = 2, ipadx = 2, ipady = 2, padx = 4)
+launch_button.grid(column = 0, row = 2, ipadx = 2, ipady = 2, padx = 12)
 
 clear_button = Button(operation_group, text = _('Clear'),
                       command = lambda: workdirs('clear'), image = clearicon,
                       width = 20, compound = 'left')
 
-clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 4)
-
-# Лог и прогресс
-# TODO: Depricated
-progress_log = Text(progress_group, state = 'disabled', relief = 'flat',
-                    width = 31, height = 10)
-progress_log.grid(ipadx = 2, ipady = 2, padx = 4, column = 0, row = 0)
+clear_button.grid(column = 1, row = 2, ipadx = 2, ipady = 2, padx = 0)
 
 if __name__ == '__main__':
     window.mainloop()
