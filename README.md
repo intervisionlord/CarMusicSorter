@@ -32,7 +32,7 @@
 
 <a name="interface"></a>
 #### Интерфейс
-<img src="https://i.imgur.com/qlqHY1K.png">
+<img src="https://i.imgur.com/57hvvMy.png">
 
 <a name="versions"></a>
 #### Версии
