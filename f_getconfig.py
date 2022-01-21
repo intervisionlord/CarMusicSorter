@@ -2,13 +2,13 @@
 import yaml
 
 
-def getconfig():
+def getconfig() -> dict[str, dict[str, str]]:
     """Определяет наличие конфига и загружает его."""
     try:
         conffile = open('conf/main.yml', 'r')
     except IOError:  # FIXME: Убрать exit() в результате эксепшена
         exit(messagebox.showerror('ERROR', _('Config file not found')))
 
-    config = yaml.full_load(conffile)
+    config: dict[str, dict[str, str]] = yaml.full_load(conffile)
     conffile.close()
     return config

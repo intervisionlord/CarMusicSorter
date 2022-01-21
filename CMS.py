@@ -5,6 +5,7 @@ import re
 import shutil
 import w_settings
 
+from typing import Union
 from sys import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame
 from tkinter import Toplevel
@@ -22,7 +23,7 @@ source_file = []
 # BEGIN FUNCTIONS #
 # FIXME: Вынести по возможности в отдельные файлы
 # Определение исходной и целевой директорий
-def workdirs(param):
+def workdirs(param: str) -> None:
     """Открывает диалог выбора директории."""
     if param == 'indir':
         global input_dir
@@ -47,13 +48,13 @@ def workdirs(param):
         input_dir = output_dir = ''
 
 
-def path_short(path_string, len):
+def path_short(path_string: str, len: int) -> Union[str, Path]:
     """Сокращает путь для корректного отображения в лейбле."""
     return Path(*Path(path_string).parts[-len:])
 
 
 # Вызов "О программе"
-def popup_about(vers):
+def popup_about(vers: str) -> None:
     """Открывает окно 'О программе'."""
 # Центровка окна
     main_width = 400
@@ -87,7 +88,7 @@ def popup_about(vers):
 
 
 # Основные операции
-def check_paths():
+def check_paths() -> None:
     """Проверяет, что все пути заданы корректно и запускает копирование."""
     if input_dir == '' or output_dir == '':
         writelog(_('Input DIR or Output DIR are not defined!'))
@@ -108,7 +109,7 @@ def check_paths():
     source_file.clear()
 
 
-def processing():
+def processing() -> None:
     """Удаляет ремиксы и лайвы."""
     check_paths()
 # Удаление ремиксов и лайвов
@@ -129,7 +130,7 @@ def processing():
     polish_filenames()
 
 
-def polish_filenames():
+def polish_filenames() -> None:
     """Удаляет из имен треков мусор."""
 # Готовим список свежепринесенных файлов с вычищенными ремиксами и лайвами
     for files in os.walk(output_dir):
@@ -153,7 +154,7 @@ def polish_filenames():
 
 
 # Копируем файлы
-def maincopy(files, output_dir):
+def maincopy(files: str, output_dir: Path) -> None:
     """Копирует файлы."""
     writelog(f'{files}')
     filename = str.split(files, '/')

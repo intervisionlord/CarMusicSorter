@@ -1,26 +1,27 @@
 """Определяет логирование процесса."""
 import os
 import codecs
+from typing import Union
 from f_getconfig import getconfig
 from datetime import datetime
 
 timestamp = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
-opt_logging = getconfig()['settings']['logging']
-opt_logname = getconfig()['settings']['logname']
+opt_logging: str = getconfig()['settings']['logging']
+opt_logname: str = getconfig()['settings']['logname']
 
 
-def check_logging_opt():
+def check_logging_opt() -> Union[bool, str]:
     """Проверяет параметр логирования в конфиге."""
-    if opt_logging is True:
+    if opt_logging == 'True':
         return True
-    elif opt_logging is False:
+    elif opt_logging == 'False':
         return False
     else:
         return 'ERR'
 
 
-def writelog(logmsg):
+def writelog(logmsg: str) -> None:
     """Пишет лог, если так указано в конфиге."""
     if os.path.isfile(opt_logname) is False:
         pass

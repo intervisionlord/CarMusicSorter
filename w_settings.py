@@ -10,16 +10,16 @@ POPUP_WIDTH: int = 160
 POPUP_HEIGHT: int = 110
 
 
-def check_langs():
+def check_langs() -> list[str]:
     """Проверяет какие локализации доступны."""
-    langs: list = os.listdir('l10n')
+    langs: list[str] = os.listdir('l10n')
     return langs
 
 
-def apply(lang, popup, log_var):
+def apply(lang: str, popup, log_var: str) -> None:
     """Применяет изменения и вносит их в конфиг."""
     conffile = open('conf/main.yml', 'r')
-    config = yaml.full_load(conffile)
+    config: dict[str, dict[str, str]] = yaml.full_load(conffile)
     conffile.close()
     config['settings']['locale'] = lang
     config['settings']['logging'] = log_var
@@ -30,12 +30,12 @@ def apply(lang, popup, log_var):
     popup.destroy()
 
 
-def current_lang():
+def current_lang() -> int:
     """Определяет индекс текущего языка для выпадающего списка."""
     return check_langs().index(getconfig()['settings']['locale'])
 
 
-def popup_settings():
+def popup_settings() -> None:
     """Открывает окно 'Настройки'."""
     popup = Toplevel()
     log_var = BooleanVar()
@@ -67,9 +67,9 @@ def popup_settings():
 
     log_settings.grid(column = 1, row = 1)
 
-    if getconfig()['settings']['logging'] is True:
+    if getconfig()['settings']['logging'] == 'True':
         log_var.set(True)
-    elif getconfig()['settings']['logging'] is False:
+    elif getconfig()['settings']['logging'] == 'False':
         log_var.set(False)
 
     apply_button = Button(popup, text = _('Apply'),
