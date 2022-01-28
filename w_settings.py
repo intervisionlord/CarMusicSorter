@@ -1,7 +1,6 @@
 """Отрисовка окна настроек."""
 import os
 import yaml
-import re
 from tkinter import BooleanVar
 from tkinter import Toplevel, LabelFrame, PhotoImage, Label, messagebox
 from tkinter.ttk import Combobox, Button, Checkbutton
@@ -23,7 +22,7 @@ def apply(lang: str, popup, log_var: bool) -> None:
     config: dict[str, dict[str, str]] = yaml.full_load(conffile)
     conffile.close()
     config['settings']['locale'] = lang
-    config['settings']['logging'] = re.sub(r'\'', '', str(log_var))
+    config['settings']['logging'] = str(log_var)
     with open(r'conf/main.yml', 'w') as file:
         yaml.dump(config, file)
     messagebox.showinfo(_('Information'),
@@ -85,7 +84,3 @@ def popup_settings() -> None:
     popup.grab_set()
     popup.focus_set()
     popup.wait_window()
-
-if __name__ == '__main__':
-    print(bool(getconfig()['settings']['logging']))
-    print(getconfig()['settings']['logging'])

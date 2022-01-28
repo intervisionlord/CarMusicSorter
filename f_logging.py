@@ -7,12 +7,12 @@ from datetime import datetime
 
 timestamp = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
-opt_logging: str = getconfig()['settings']['logging']
 opt_logname: str = getconfig()['settings']['logname']
 
 
 def check_logging_opt() -> Union[bool, str]:
     """Проверяет параметр логирования в конфиге."""
+    opt_logging: str = getconfig()['settings']['logging']
     if opt_logging == 'True':
         return True
     elif opt_logging == 'False':
