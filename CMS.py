@@ -5,18 +5,19 @@ import re
 import shutil
 import w_settings
 
+from threading import Thread
 from typing import Union
 from sys import exit
 from tkinter import Tk, PhotoImage, Menu, LabelFrame
-from tkinter import Toplevel
+from tkinter import Toplevel, messagebox
 from tkinter.ttk import Button, Label, Progressbar
 from pathlib import Path
 from f_getconfig import getconfig
 from f_logging import writelog
 
 import tkinter.filedialog as fd
-input_dir = ''
-output_dir = ''
+input_dir: str = ''
+output_dir: str = ''
 source_file = []
 
 
@@ -105,8 +106,14 @@ def check_paths() -> None:
                     source_file.append(f'{path}/{filtered.group(0)}')
     main_progressbar['maximum'] = len(source_file)
     for files in source_file:
-        maincopy(files, output_dir)
+        maincopy(files, Path(output_dir))
     source_file.clear()
+
+
+def proc_thread():
+    """Запускает процесс в отдельном потоке."""
+    forked_thread = Thread(target = processing)
+    forked_thread.start()
 
 
 def processing() -> None:
@@ -151,13 +158,15 @@ def polish_filenames() -> None:
         window.update_idletasks()
     source_file.clear()
     writelog(_('Completed!'))
+    messagebox.showinfo(_('Information'),
+                        _('Completed!'))
 
 
 # Копируем файлы
-def maincopy(files: str, output_dir: Path) -> None:
+def maincopy(files: list[str], output_dir: Path) -> None:
     """Копирует файлы."""
     writelog(f'{files}')
-    filename = str.split(files, '/')
+    filename = str.split(str(files), '/')
     writelog(filename[-1])
     shutil.copyfile(f'{files}', f'{output_dir}/{filename[-1]}')
     main_progressbar['value'] = main_progressbar['value'] + 1
@@ -262,7 +271,7 @@ dest_button = Button(first_group, text = _('Output Dir'),
 dest_button.grid(row = 1, ipadx = 2, ipady = 2, padx = 4)
 
 launch_button = Button(operation_group, text = _('Process'),
-                       command = processing, image = launchicon,
+                       command = proc_thread, image = launchicon,
                        width = 20, compound = 'left')
 launch_button.grid(column = 0, row = 2, ipadx = 2, ipady = 2, padx = 12)
 

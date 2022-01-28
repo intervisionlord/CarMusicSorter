@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CarMusicSorter\n"
-"POT-Creation-Date: 2022-01-15 01:40+0300\n"
-"PO-Revision-Date: 2022-01-15 01:40+0300\n"
+"POT-Creation-Date: 2022-01-28 16:52+0300\n"
+"PO-Revision-Date: 2022-01-28 16:52+0300\n"
 "Last-Translator: Intervision\n"
 "Language-Team: Intervision\n"
 "Language: en\n"
@@ -19,122 +19,118 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: CMS.py:29
+#: CMS.py:31
 msgid "Open source directory"
 msgstr ""
 
-#: CMS.py:32
+#: CMS.py:34
 msgid "Input DIR set to: "
 msgstr ""
 
-#: CMS.py:37
+#: CMS.py:39
 msgid "Set destination directory"
 msgstr ""
 
-#: CMS.py:40
+#: CMS.py:42
 msgid "Output DIR set to: "
 msgstr ""
 
-#: CMS.py:44 CMS.py:258
+#: CMS.py:46 CMS.py:255
 msgid "Input DIR not defined"
 msgstr ""
 
-#: CMS.py:45 CMS.py:259
+#: CMS.py:47 CMS.py:256
 msgid "Output DIR not defined"
 msgstr ""
 
-#: CMS.py:46
-msgid "Paths cleared"
-msgstr ""
-
-#: CMS.py:75 CMS.py:208
+#: CMS.py:68 CMS.py:206
 msgid "About"
 msgstr ""
 
-#: CMS.py:81
+#: CMS.py:74
 msgid "Version: "
 msgstr ""
 
-#: CMS.py:83
+#: CMS.py:76
 msgid ""
 "\n"
 "Author: "
 msgstr ""
 
-#: CMS.py:89
+#: CMS.py:82
 msgid "Icons: "
 msgstr ""
 
-#: CMS.py:89
+#: CMS.py:82
 msgid "on"
 msgstr ""
 
-#: CMS.py:102
+#: CMS.py:95
 msgid "Input DIR or Output DIR are not defined!"
 msgstr ""
 
-#: CMS.py:104
+#: CMS.py:97
 msgid "Input DIR and Output DIR must be different!"
 msgstr ""
 
-#: CMS.py:134
+#: CMS.py:132
 msgid "Removing Remix: "
 msgstr ""
 
-#: CMS.py:162 CMS.py:163
+#: CMS.py:160 CMS.py:162
 msgid "Completed!"
 msgstr ""
 
-#: CMS.py:204
+#: CMS.py:161 w_settings.py:28
+msgid "Information"
+msgstr ""
+
+#: CMS.py:202
 msgid "File"
 msgstr ""
 
-#: CMS.py:205
+#: CMS.py:203
 msgid "Info"
 msgstr ""
 
-#: CMS.py:212 CMS.py:267
+#: CMS.py:209 CMS.py:263
 msgid "Input Dir"
 msgstr ""
 
-#: CMS.py:215 CMS.py:272
+#: CMS.py:212 CMS.py:268
 msgid "Output Dir"
 msgstr ""
 
-#: CMS.py:218 CMS.py:282
+#: CMS.py:215 CMS.py:278
 msgid "Clear"
 msgstr ""
 
-#: CMS.py:222 w_settings.py:49 w_settings.py:50
+#: CMS.py:219 w_settings.py:48 w_settings.py:50
 msgid "Settings"
 msgstr ""
 
-#: CMS.py:225
+#: CMS.py:222
 msgid "Exit"
 msgstr ""
 
-#: CMS.py:239
+#: CMS.py:236
 msgid "IO Directories"
 msgstr ""
 
-#: CMS.py:244
+#: CMS.py:241
 msgid "Operations"
 msgstr ""
 
-#: CMS.py:248
+#: CMS.py:245
 msgid "Progress"
 msgstr ""
 
-#: CMS.py:277
+#: CMS.py:273
 msgid "Process"
 msgstr ""
 
 #: f_getconfig.py:10
 msgid "Config file not found"
-msgstr ""
-
-#: w_settings.py:28
-msgid "Information"
 msgstr ""
 
 #: w_settings.py:29
@@ -149,6 +145,6 @@ msgstr ""
 msgid "Logging"
 msgstr ""
 
-#: w_settings.py:75
+#: w_settings.py:77
 msgid "Apply"
 msgstr ""

@@ -1,6 +1,7 @@
 """Отрисовка окна настроек."""
 import os
 import yaml
+import re
 from tkinter import BooleanVar
 from tkinter import Toplevel, LabelFrame, PhotoImage, Label, messagebox
 from tkinter.ttk import Combobox, Button, Checkbutton
@@ -16,13 +17,13 @@ def check_langs() -> list[str]:
     return langs
 
 
-def apply(lang: str, popup, log_var: str) -> None:
+def apply(lang: str, popup, log_var: bool) -> None:
     """Применяет изменения и вносит их в конфиг."""
     conffile = open('conf/main.yml', 'r')
     config: dict[str, dict[str, str]] = yaml.full_load(conffile)
     conffile.close()
     config['settings']['locale'] = lang
-    config['settings']['logging'] = log_var
+    config['settings']['logging'] = re.sub(r'\'', '', str(log_var))
     with open(r'conf/main.yml', 'w') as file:
         yaml.dump(config, file)
     messagebox.showinfo(_('Information'),
@@ -72,17 +73,19 @@ def popup_settings() -> None:
     elif getconfig()['settings']['logging'] == 'False':
         log_var.set(False)
 
-    apply_button = Button(popup, text = _('Apply'),
-                          width = 20, compound = 'left',
-                          image = launchicon,
-                          command = lambda: apply(lang_vars.get(),
-                                                  popup, log_var.get()))
+    apply_button = Button(popup, text = _('Apply'), width = 20,
+                          compound = 'left', image = launchicon,
+                          command = lambda: apply(
+                                                  lang_vars.get(),
+                                                  popup, log_var.get()
+                                                  )
+                          )
     apply_button.grid(column = 0, row = 1)
 
     popup.grab_set()
     popup.focus_set()
     popup.wait_window()
 
-
 if __name__ == '__main__':
-    print(current_lang())
+    print(bool(getconfig()['settings']['logging']))
+    print(getconfig()['settings']['logging'])

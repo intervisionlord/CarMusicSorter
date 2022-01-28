@@ -34,4 +34,4 @@ def writelog(logmsg: str) -> None:
                 log.write(f'{timestamp} - {logmsg}\n')
     elif check_logging_opt() == 'ERR':
         with codecs.open(opt_logname, 'a', 'utf-8') as log:
-            log.write('Logging config error!')
+            log.write(f'{timestamp} - Logging config error!\n')
