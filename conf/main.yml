@@ -1,6 +1,6 @@
 core:
-  version: 0.5.9.1
+  version: 0.6.0.0
 settings:
   locale: ru
-  logging: true
+  logging: 'False'
   logname: cms.log
