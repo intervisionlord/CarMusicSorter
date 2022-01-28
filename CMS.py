@@ -8,12 +8,12 @@ import w_settings
 from threading import Thread
 from typing import Union
 from sys import exit
-from tkinter import Tk, PhotoImage, Menu, LabelFrame
-from tkinter import Toplevel, messagebox
+from tkinter import Tk, PhotoImage, Menu, LabelFrame, messagebox
 from tkinter.ttk import Button, Label, Progressbar
 from pathlib import Path
 from f_getconfig import getconfig
 from f_logging import writelog
+from w_about import popup_about
 
 import tkinter.filedialog as fd
 input_dir: str = ''
@@ -52,40 +52,6 @@ def workdirs(param: str) -> None:
 def path_short(path_string: str, len: int) -> Union[str, Path]:
     """Сокращает путь для корректного отображения в лейбле."""
     return Path(*Path(path_string).parts[-len:])
-
-
-# Вызов "О программе"
-def popup_about(vers: str) -> None:
-    """Открывает окно 'О программе'."""
-# Центровка окна
-    main_width = 400
-    main_height = 150
-    center_x_pos = int(window.winfo_screenwidth() / 2) - main_width
-    center_y_pos = int(window.winfo_screenheight() / 2) - main_height
-
-    popup = Toplevel()
-    popup.geometry(f'{main_width}x{main_height}+{center_x_pos}+{center_y_pos}')
-    popup.title(_('About'))
-    imagepath = 'data/imgs/main.png'
-    img = PhotoImage(file = imagepath)
-    poplabel1 = Label(popup, image = img)
-    poplabel1.grid(sticky = 'W', column = 0, row = 0, rowspan = 2)
-
-    name_vers_str = 'Car Music Sorter\n\n' + _('Version: ') + vers
-    author_github = 'https://github.com/intervisionlord'
-    prog_author = _('\nAuthor: ') + 'Intervision\nGithub: ' + author_github
-    poplabel_maindesc = Label(popup,
-                              text = name_vers_str + prog_author,
-                              justify = 'left')
-    poplabel_maindesc.grid(sticky = 'W', column = 1, row = 0)
-# Автор иконок
-    icons_author = _('Icons: ') + 'icon king1 ' + _('on') + ' freeicons.io'
-    poplabel_icons = Label(popup, text = icons_author, justify = 'left')
-    poplabel_icons.grid(sticky = 'W', column = 1, row = 1)
-
-    popup.grab_set()
-    popup.focus_set()
-    popup.wait_window()
 
 
 # Основные операции
@@ -204,7 +170,7 @@ menu.add_cascade(label = _('Info'), menu = menu_about)
 
 # Элементы меню
 menu_about.add_command(label = _('About'),
-                       command = lambda: popup_about(vers),
+                       command = lambda: popup_about(window, vers),
                        accelerator = 'F1')
 menu_file.add_command(label = _('Input Dir'),
                       command = lambda: workdirs('indir'),
@@ -229,7 +195,7 @@ menu_file.bind_all('<Command-d>', lambda event: workdirs('outdir'))
 menu_file.bind_all('<Command-r>', lambda event: workdirs('clear'))
 menu_file.bind_all('<Command-e>', exit)
 
-menu_about.bind_all('<F1>', lambda event: popup_about(vers))
+menu_about.bind_all('<F1>', lambda event: popup_about(window, vers))
 window.config(menu = menu)
 
 # Строим элеметны основного окна и группы
