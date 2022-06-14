@@ -1,4 +1,6 @@
-# <img src="https://i.imgur.com/dSzqaaP.png"  width=50 alt="Car Music Sorter Icon"> Car Music Sorter
+<img src="https://i.imgur.com/dSzqaaP.png"  width=50 alt="Car Music Sorter Icon">
+
+# Car Music Sorter
 
 [![Build Status](https://app.travis-ci.com/intervisionlord/CarMusicSorter.svg?branch=master)](https://app.travis-ci.com/intervisionlord/CarMusicSorter)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/intervisionlord/CarMusicSorter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/intervisionlord/CarMusicSorter/?branch=master)
@@ -14,13 +16,16 @@
 
 ---
 
-1. [Общие сведения](#summary)
-    * [Интерфейс](#interface)
-    * [Версии](#versions)
-1. [Использование](#usage)
-1. [Локализация](#localization)
+- [Car Music Sorter](#car-music-sorter)
+    - [1. Общие сведения](#1-общие-сведения)
+      - [Интерфейс](#интерфейс)
+      - [Версии](#версии)
+      - [Скачать последнюю версию](#скачать-последнюю-версию)
+          - [CarMusicSorter (latest)](#carmusicsorter-latest)
+    - [2. Использование](#2-использование)
+    - [3. Локализация](#3-локализация)
 
-<a name="summary"></a>
+
 ### 1. Общие сведения
 Программа собирает треки из директории исполнителя и субдиректорий, переносит их в целевую директорию одним списком (без субдиректорий).
 Затем вычищает из имен файлов цифры в начале имени файла - номера треков (если есть), убирает потенциальные дубли треков (напр. синглы),
@@ -29,11 +34,9 @@
 
 <img src="https://i.imgur.com/wwkq7Sh.png">
 
-<a name="interface"></a>
 #### Интерфейс
 <img src="https://i.imgur.com/57hvvMy.png">
 
-<a name="versions"></a>
 #### Версии
 Реализовано 2 варианта программы:
   * С графическим интерфейсом (GUI)
@@ -43,17 +46,13 @@
 #### Скачать последнюю версию
 ###### [CarMusicSorter (latest)](https://github.com/intervisionlord/CarMusicSorter/releases/latest)
 
-<a name="usage"></a>
 ### 2. Использование
   1. После запуска программы необходимо указать начальную директорию, в которой будет осуществляться поиск треков.
   2. Далее необходимо указать конечную директорию, в которой будут размещены преобразовыные треки.
   3. После необходимо нажать кнопку `Начать` и дождаться завершения работы программы.
 
-<a name="localization"></a>
 ### 3. Локализация
 Локализация размещается в директории `l10n`.
 Для создания своей локализации можно взять за исходный шаблон `CarMusicSorter.pot`, после перевода и компиляции файлов перевода их необходимо разместить в директории `l10n` и поддиректории с кодом языка.
 
 Установка необходимой локализации осуществляется в меню `Файл`->`Настройки` или конфиге `conf/main.yml`
-
-<a name="problems"></a>
