@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
-from CMS import getconfig, path_short
-
+from CMS import path_short
+from f_getconfig import getconfig
 
 def test_getconfig_locale_not_null():
     """Проверка заполненности локали в конфиге."""

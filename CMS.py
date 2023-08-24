@@ -66,8 +66,7 @@ def check_paths() -> None:
         for path, subdirs, files in os.walk(input_dir):
             for file in files:
                 # Перегоняем MP3 без лайвов и ремиксов в целевую директорию.
-                filtered = re.search(r'^(?!(.*[Rr]emix.*|.*[Ll]ive.*)).*mp3',
-                                     file)
+                filtered = re.search(r'^(?!(.*[Rr]emix.*|.*[Ll]ive.*)).*mp3', file)
                 if filtered is not None:
                     source_file.append(f'{path}/{filtered.group(0)}')
     main_progressbar['maximum'] = len(source_file)
@@ -114,8 +113,7 @@ def polish_filenames() -> None:
                 pass
 
 # Убираем из имен файлов мусор (номера треков в различном формате)
-    main_progressbar['maximum'] = (main_progressbar['maximum'] +
-                                   len(source_file))
+    main_progressbar['maximum'] = (main_progressbar['maximum'] + len(source_file))
     trashregexp = r'^[\d{1,2}\s\-\.]*'
     for file in source_file:
         new_file = re.sub(trashregexp, '', file)
@@ -201,16 +199,23 @@ window.config(menu = menu)
 # Строим элеметны основного окна и группы
 first_group = LabelFrame(window, text = _('IO Directories'))
 
-first_group.grid(sticky = 'WE', column = 0, row = 0, padx = 5, pady = 10,
+first_group.grid(sticky = 'WE',
+                 column = 0, row = 0,
+                 padx = 5, pady = 10,
                  ipadx = 2, ipady = 4)
 
 operation_group = LabelFrame(window, text = _('Operations'))
-operation_group.grid(sticky = 'WE', column = 0, row = 3, padx = 5, pady = 5,
+operation_group.grid(sticky = 'WE',
+                     column = 0, row = 3,
+                     padx = 5, pady = 5,
                      ipadx = 5, ipady = 5)
 
 progress_group = LabelFrame(window, text = _('Progress'))
-progress_group.grid(sticky = 'WE', column = 0, row = 1, padx = 5, pady = 5,
-                    ipadx = 0, ipady = 2, rowspan = 2)
+progress_group.grid(sticky = 'WE',
+                    column = 0, row = 1,
+                    padx = 5, pady = 5,
+                    ipadx = 0, ipady = 2,
+                    rowspan = 2)
 
 # Прогрессбар
 main_progressbar = Progressbar(progress_group, length = 350, value = 0,
